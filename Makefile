@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/01/27 14:55:12 by alngo            ###   ########.fr        #
+#    Updated: 2020/01/27 15:10:41 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,8 +62,7 @@ fclean:	clean
 	$(RM) -r $(SLNK)
 
 test: $(NAME)
-	make -C ci/
-	make run -C ci/
+	make test -C ci/
 
 re:	fclean all
 

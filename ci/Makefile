@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/01/27 15:01:39 by alngo            ###   ########.fr        #
+#    Updated: 2020/01/27 15:10:59 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,8 @@ $(NAME): $(OBJ_PATH) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -I $(INC_PATH)/ -I ../$(INC_PATH)/ \
 	   ../$(LFT) -o $(NAME)
 
-run:
-	./$(NAME) 
+test: $(NAME)
+	./test.sh
 
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
