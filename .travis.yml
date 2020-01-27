@@ -11,4 +11,4 @@ os:
         - linux
         - osx
 script:
-        (cd ci && make && ./check_example.sh)
+        (cd ci && make && ./check.sh)
