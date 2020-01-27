@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/27 15:51:04 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/27 17:44:29 by alngo            ###   ########.fr       */
 /*                                                                           */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 #include <stddef.h>
 #include <limits.h>
+
+typedef enum		e_malloc_type
+{
+	TINY = 42,
+	SMALL = 2048,
+	LARGE = -1
+}					t_malloc_type;
 
 typedef struct		s_meta
 {
