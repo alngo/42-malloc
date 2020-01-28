@@ -6,12 +6,12 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:22:43 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/27 17:36:17 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 13:34:49 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void show_alloc_mem()
+void	show_alloc_mem(void)
 {
 }

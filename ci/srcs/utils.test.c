@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:39:42 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 12:59:21 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 13:04:12 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ MU_TEST(utils_test_set_meta)
 	meta_c = set_meta(ptr_c, 12345, MMAPD, meta_b);
 
 	mu_check(meta_a->size == 42);
-	printf("[%d]\n", meta_a->flags);
 	mu_check(meta_a->flags == 0x6);
 	mu_check(meta_a->next == NULL);
 
