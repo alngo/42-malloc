@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 15:55:07 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 17:15:31 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 17:32:35 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,45 @@ MU_TEST(free_test_valid_pointer)
 
 	mu_check(meta_a->flags == 0x0);
 	mu_check(meta_b->flags == 0x0);
-	mu_check(msync(meta_c, 5000, 0) < 0);
+	msync(meta_c, 5000, 0);
+	mu_check(errno == ENOMEM);
+}
+
+MU_TEST(free_test_multiple_free)
+{
+	void	*ptr_a;
+	void	*ptr_b;
+	void	*ptr_c;
+
+	t_meta	*meta_a;
+	t_meta	*meta_b;
+	t_meta	*meta_c;
+
+	ptr_a = malloc(42);
+	ptr_b = malloc(1000);
+	ptr_c = malloc(5000);
+
+	meta_a = get_meta(ptr_a - sizeof(t_meta));
+	meta_b = get_meta(ptr_b - sizeof(t_meta));
+	meta_c = get_meta(ptr_c - sizeof(t_meta));
+
+	free(ptr_a);
+	free(ptr_a);
+	free(ptr_b);
+	free(ptr_b);
+	free(ptr_c);
+	free(ptr_c);
+
+	mu_check(meta_a->flags == 0x0);
+	mu_check(meta_b->flags == 0x0);
+	mu_check(errno == EINVAL);
 }
 
 MU_TEST_SUITE(free_test_suite)
 {
 	MU_RUN_TEST(free_test_invalid_pointer);
 	MU_RUN_TEST(free_test_valid_pointer);
+	MU_RUN_TEST(free_test_multiple_free);
 }
 
 int free_test()

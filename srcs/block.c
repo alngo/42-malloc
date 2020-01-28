@@ -6,11 +6,12 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:03:38 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 15:11:21 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 17:46:17 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
+#include <stdio.h>
 
 void		*first_fit(void *heap, size_t size)
 {
@@ -52,6 +53,28 @@ void		*large_fit(void *heap, size_t size)
 	return (get_payload(heap));
 }
 
+void		*match_block(void *ptr, void *heap)
+{
+	void	*block;
+	void	*block_payload;
+	t_meta	*heap_meta;
+	t_meta	*block_meta;
+
+	if (!heap)
+		return (NULL);
+	heap_meta = get_meta(heap);
+	block = (heap_meta->flags & INUSE) ? heap : get_payload(heap);
+	while (block)
+	{
+		block_meta = get_meta(block);
+		block_payload = get_payload(block);
+		if (block_payload == ptr && block_meta->flags & INUSE)
+			break ;
+		block = block_meta->next;
+	}
+	return (block);
+}
+
 void		*get_block(void **heap, size_t size)
 {
 	void	*block;
@@ -65,4 +88,23 @@ void		*get_block(void **heap, size_t size)
 	if (block)
 		return (block);
 	return (get_block(&((t_meta *)(*heap))->next, size));
+}
+
+void		*get_block_at(void *ptr)
+{
+	uint8_t	index;
+	void	*heaps[3];
+	void	*target;
+
+	heaps[0] = g_arena.tiny;
+	heaps[1] = g_arena.small;
+	heaps[2] = g_arena.large;
+	index = 0;
+	while (index < 3)
+	{
+		if ((target = match_block(ptr, heaps[index])))
+			break ;
+		index++;
+	}
+	return (target);
 }

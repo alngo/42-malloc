@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 16:02:13 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 17:18:36 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void				free(void *ptr);
 */
 
 void				*get_block(void **heap, size_t size);
-void				*first_fit(void *heap, size_t size);
+void				*get_block_at(void *ptr);
 
 /*
 ** heap.c
