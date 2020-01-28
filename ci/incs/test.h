@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 10:38:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/27 14:49:56 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 10:45:47 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,8 @@
 
 #include "malloc.h"
 #include "minunit.h"
+
+int	utils_test();
+int	malloc_test();
 
 #endif

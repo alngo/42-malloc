@@ -1,7 +1,6 @@
 # ft_malloc
 Projet plutôt UNIX
 
-
 ### Description
 
 Une librairie de gestion de l'allocation dynamique de la mémoire.
@@ -19,3 +18,34 @@ void show_alloc_mem();
   - getrlimit
   - libpthread
   - libft
+
+### Structure
+
+```
+[tiny][small]:
+
+Arenas:					=> arena are getpagesize() aligned
+	[size|flags][next] 	=> 16bits; 
+	[null]
+or:
+	[size|flags][next] 	=> 16bits;
+	[...]				=> payload are sizeof(void *) aligned
+	[...]
+	[...]
+	[...]
+	[size|flags][next] 	=> 16bits;
+	[...]
+	[...]
+
+[large]:
+	[size|flags][next] 	=> 16bits;
+	[...]
+	[...]
+	[...]
+	[...]
+	[size|flags][next] 	=> 16bits;
+	[...]
+	[...]
+
+flas = Mmap'd | PrevInUse
+```
