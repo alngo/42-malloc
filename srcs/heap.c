@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 12:33:28 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 12:33:36 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 14:56:20 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void		*init_heap(size_t size)
 	if ((ptr = mmap(ptr, heap_size, PROT_READ | PROT_WRITE,
 					MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED)
 		return (NULL);
-	set_meta(ptr, heap_size, INUSE | MMAPD, NULL);
+	set_meta(ptr, heap_size, MMAPD, NULL);
 	return (ptr);
 }

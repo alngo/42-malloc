@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:39:42 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 13:04:12 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 15:10:11 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ MU_TEST_SUITE(utils_test_suite)
 
 int utils_test()
 {
+	printf("Run utils test suite:\n");
 	MU_RUN_SUITE(utils_test_suite);
 	MU_REPORT();
 	return MU_EXIT_CODE;
