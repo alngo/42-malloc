@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/01/27 15:10:59 by alngo            ###   ########.fr        #
+#    Updated: 2020/01/28 10:39:30 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ CFLAGS := -fsanitize=address
 SRC_PATH := srcs
 OBJ_PATH := objs
 INC_PATH := incs
-SRC_NAME := 	main.c 
+SRC_NAME := main.c \
+			malloc.test.c \
+			utils.test.c
 
 OBJ_NAME := $(SRC_NAME:.c=.o)
 

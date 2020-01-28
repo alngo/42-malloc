@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:18:41 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 10:22:52 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 10:34:15 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,20 @@ void		*init_heap(size_t size)
 	if ((ptr = mmap(ptr, heap_size, PROT_READ | PROT_WRITE,
 					MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED)
 		return (NULL);
-	set_meta(ptr, heap_size, ALLOCATED | MMAPD, NULL);
+	set_meta(ptr, heap_size, MMAPD, NULL);
 	return (ptr);
+}
+
+void		*first_fit(void *heap, size_t size)
+{
+	void	*blocks;
+	t_meta	*meta;
+
+	blocks = get_payload(heap);
+	meta = get_meta(blocks);
+	if (!(meta->data & INUSE))
+		set_meta((void *)meta, size, INUSE, NULL);
+	return ((void *)meta);
 }
 
 void		*get_chunk(void **heap, size_t size)
@@ -49,7 +61,9 @@ void		*get_chunk(void **heap, size_t size)
 	(void)block;
 	if (!*heap && !(*heap = init_heap(size)))
 		return (NULL);
-	return (NULL);
+	if ((block = first_fit(*heap, size)))
+		return (block);
+	return (get_chunk(&((t_meta *)(*heap))->next, size));
 }
 
 void 		*malloc(size_t size)
