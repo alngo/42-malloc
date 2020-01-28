@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/27 17:44:29 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 10:19:25 by alngo            ###   ########.fr       */
 /*                                                                           */
 /* ************************************************************************** */
 
@@ -15,12 +15,23 @@
 
 #include <stddef.h>
 #include <limits.h>
+#include <stdint.h>
+#include <unistd.h>
+#include <sys/mman.h>
+
+typedef enum		e_malloc_mask
+{
+	FLAGS = 0x7,
+	ALLOCATED = 0x4,
+	MMAPD = 0x2,
+	PREVINUSE = 0x1
+}					t_malloc_mask;
 
 typedef enum		e_malloc_type
 {
-	TINY = 42,
-	SMALL = 2048,
-	LARGE = -1
+	TINY = 128,
+	SMALL = 1024,
+	LARGE = 4096
 }					t_malloc_type;
 
 typedef struct		s_meta
@@ -39,5 +50,15 @@ typedef struct		s_arena
 t_arena				arenas;
 
 void				*malloc(size_t size);
+
+
+/*
+** utils.c
+*/
+
+void		*get_payload(void *ptr);
+t_meta		*get_meta(void *ptr);
+void		*set_meta(void *ptr, size_t size, uint8_t flags, void *next);
+size_t		size_alignment(size_t size, size_t alignment);
 
 #endif

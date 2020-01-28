@@ -46,4 +46,6 @@ or:
 	[size|flags][next] 	=> 16bits;
 	[...]
 	[...]
+
+flas = Mmap'd | PrevInUse
 ```
