@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/01/28 15:22:08 by alngo            ###   ########.fr        #
+#    Updated: 2020/01/28 16:57:36 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,14 @@ LFT := libft_malloc.so
 NAME := test.out
 
 CC := gcc
-CFLAGS :=
+CFLAGS := -fsanitize=address -g
 
 SRC_PATH := srcs
 OBJ_PATH := objs
 INC_PATH := incs
 SRC_NAME := main.c \
 			malloc.test.c \
+			free.test.c \
 			utils.test.c
 
 OBJ_NAME := $(SRC_NAME:.c=.o)

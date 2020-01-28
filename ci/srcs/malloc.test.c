@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:38:00 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 15:10:24 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 15:47:49 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ MU_TEST(malloc_test_tiny)
 
 	meta_a = get_meta(ptr_a - sizeof(t_meta));
 	meta_b = get_meta(ptr_b - sizeof(t_meta));
+
 	mu_check(meta_a->size == 42);
 	mu_check(meta_a->flags == INUSE);
 	mu_check(meta_a->next == ptr_b - sizeof(t_meta));
@@ -72,11 +73,25 @@ MU_TEST(malloc_test_large)
 	mu_check(meta_b->next == NULL);
 }
 
+MU_TEST(malloc_test_xlarge)
+{
+	void		*ptr_a;
+	t_meta		*meta_a;
+
+	ptr_a = malloc(INT_MAX);
+	meta_a = get_meta(ptr_a - sizeof(t_meta));
+
+	mu_check(meta_a->size == INT_MAX);
+	mu_check(meta_a->flags == (INUSE | MMAPD));
+	mu_check(meta_a->next == NULL);
+}
+
 MU_TEST_SUITE(malloc_test_suite)
 {
 	MU_RUN_TEST(malloc_test_invalid_size);
 	MU_RUN_TEST(malloc_test_tiny);
 	MU_RUN_TEST(malloc_test_large);
+	MU_RUN_TEST(malloc_test_xlarge);
 }
 
 int	malloc_test()
