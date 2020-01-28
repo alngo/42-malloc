@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/01/28 15:20:02 by alngo            ###   ########.fr        #
+#    Updated: 2020/01/28 15:22:08 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ LFT := libft_malloc.so
 NAME := test.out
 
 CC := gcc
-CFLAGS := -fsanitize=address
+CFLAGS :=
 
 SRC_PATH := srcs
 OBJ_PATH := objs
