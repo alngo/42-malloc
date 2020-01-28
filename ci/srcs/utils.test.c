@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:39:42 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 11:20:08 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 12:59:21 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,17 @@ MU_TEST(utils_test_set_meta)
 	meta_b = set_meta(ptr_b, ~(size_t)0, INUSE | MMAPD | PREVINUSE, meta_a);
 	meta_c = set_meta(ptr_c, 12345, MMAPD, meta_b);
 
-	mu_check(meta_a->data == 0x156);
-	mu_check(meta_b->data == ~(size_t)0);
+	mu_check(meta_a->size == 42);
+	printf("[%d]\n", meta_a->flags);
+	mu_check(meta_a->flags == 0x6);
+	mu_check(meta_a->next == NULL);
+
+	mu_check(meta_b->size == ~(size_t)0 >> 3);
+	mu_check(meta_b->flags == 0x7);
 	mu_check(meta_b->next == meta_a);
-	mu_check(meta_c->data == 0x181CA);
+
+	mu_check(meta_c->size == 12345);
+	mu_check(meta_c->flags == 0x2);
 	mu_check(meta_c->next == meta_b);
 
 	xfree(ptr_a);

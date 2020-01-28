@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 11:01:22 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 13:00:01 by alngo            ###   ########.fr       */
 /*                                                                           */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef enum		e_malloc_type
 
 typedef struct		s_meta
 {
-	size_t			data;
+	size_t			size: 61;
+	unsigned char	flags: 3;
 	void			*next;
 }					t_meta;
 
@@ -51,6 +52,12 @@ t_arena				arenas;
 
 void				*malloc(size_t size);
 
+/*
+** heap.c
+*/
+
+size_t		get_heap_size(size_t size);
+void		*init_heap(size_t size);
 
 /*
 ** utils.c

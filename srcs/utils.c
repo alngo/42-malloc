@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 09:23:18 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 10:59:17 by alngo            ###   ########.fr       */
+/*   Updated: 2020/01/28 12:48:51 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_meta		*set_meta(void *ptr, size_t size, uint8_t flags, void *next)
 	t_meta	*meta;
 
 	meta = (t_meta *)ptr;
-	meta->data = (size << 3) | (flags & FLAGS);
+	meta->size = size;
+	meta->flags = flags;
 	meta->next = next;
 	return (meta);
 }

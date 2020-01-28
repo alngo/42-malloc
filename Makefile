@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/01/28 10:35:33 by alngo            ###   ########.fr        #
+#    Updated: 2020/01/28 12:34:25 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC_NAME := 	malloc.c	\
 				free.c		\
 				realloc.c 	\
 				show_alloc_mem.c \
-				utils.c
+				utils.c		\
+				heap.c
 
 OBJ_NAME := $(SRC_NAME:.c=.o)
 
