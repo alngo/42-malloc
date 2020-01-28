@@ -1,4 +1,4 @@
-# ft_malloc ![Build Status](https://travis-ci.com/alngo/libft_malloc.svg?branch=dev)
+# ft_malloc [![Build Status](https://travis-ci.com/alngo/libft_malloc.svg?branch=dev)](https://travis-ci.com/alngo/libft_malloc)
 Projet plutôt UNIX
 
 ### Description
