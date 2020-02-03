@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:20:19 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 17:46:30 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/03 20:30:08 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ void		free(void *ptr)
 
 	if (!ptr || !(block = get_block_at(ptr)))
 		return ;
+	printf("ADRESSE RETURNED: %p\n", block);
 	data = get_meta(block);
 	set_meta(block, data->size, data->flags ^ INUSE, data->next);
 	if (data->flags & MMAPD)
 	{
 		munmap(block, data->size);
-		block = NULL;
+		*ptr = NULL;
+		//Prec->next = NULL;
 	}
 }

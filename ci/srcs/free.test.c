@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 15:55:07 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 17:32:35 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/03 20:26:06 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,13 @@ MU_TEST(free_test_multiple_free)
 	meta_b = get_meta(ptr_b - sizeof(t_meta));
 	meta_c = get_meta(ptr_c - sizeof(t_meta));
 
+	printf("ADRESSE TARGETED: %p\n", ptr_a);
 	free(ptr_a);
 	free(ptr_a);
+	printf("ADRESSE TARGETED: %p\n", ptr_b);
 	free(ptr_b);
 	free(ptr_b);
+	printf("ADRESSE TARGETED: %p\n", ptr_c);
 	free(ptr_c);
 	free(ptr_c);
 
