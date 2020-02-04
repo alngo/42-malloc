@@ -25,8 +25,8 @@ void		free(void *ptr)
 	set_meta(block, data->size, data->flags ^ INUSE, data->next);
 	if (data->flags & MMAPD)
 	{
+		//Prec->next = next->next;
 		munmap(block, data->size);
 		*ptr = NULL;
-		//Prec->next = NULL;
 	}
 }
