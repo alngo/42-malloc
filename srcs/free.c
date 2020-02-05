@@ -20,13 +20,10 @@ void		free(void *ptr)
 
 	if (!ptr || !(block = get_block_at(ptr)))
 		return ;
-	printf("ADRESSE RETURNED: %p\n", block);
 	data = get_meta(block);
 	set_meta(block, data->size, data->flags ^ INUSE, data->next);
 	if (data->flags & MMAPD)
 	{
-		//Prec->next = next->next;
 		munmap(block, data->size);
-		*ptr = NULL;
 	}
 }
