@@ -135,7 +135,6 @@ MU_TEST(free_test_prec_next_large)
 	mu_check(meta_a->next == NULL);
 	free(ptr_a);
 	mu_check(munmap(ptr_a, 5000) == -1);
-
 }
 
 MU_TEST_SUITE(free_test_suite)

@@ -15,7 +15,7 @@ LFT := libft_malloc.so
 NAME := test.out
 
 CC := gcc
-CFLAGS := -fsanitize=address -g
+CFLAGS :=
 
 SRC_PATH := srcs
 OBJ_PATH := objs
