@@ -57,7 +57,7 @@ void				free(void *ptr);
 */
 
 void				*get_block(void **heap, size_t size);
-void				*get_block_at(void *ptr);
+void				*find_block_at(void *ptr, t_meta **prec);
 
 /*
 ** heap.c

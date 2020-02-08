@@ -68,7 +68,7 @@ void		*get_block(void **heap, size_t size)
 	return (get_block(&((t_meta *)(*heap))->next, size));
 }
 
-void		*match_block(void *ptr, void *heap)
+void		*get_block_at(void *ptr, void *heap, t_meta **prec)
 {
 	void	*block;
 	void	*block_payload;
@@ -85,12 +85,13 @@ void		*match_block(void *ptr, void *heap)
 		block_payload = get_payload(block);
 		if (block_payload == ptr && block_meta->flags & INUSE)
 			break ;
+		*prec = block_meta;
 		block = block_meta->next;
 	}
 	return (block);
 }
 
-void		*get_block_at(void *ptr)
+void		*find_block_at(void *ptr, t_meta **prec)
 {
 	uint8_t	index;
 	void	*heaps[3];
@@ -102,7 +103,7 @@ void		*get_block_at(void *ptr)
 	index = 0;
 	while (index < 3)
 	{
-		if ((target = match_block(ptr, heaps[index])))
+		if ((target = get_block_at(ptr, heaps[index], prec)))
 			break ;
 		index++;
 	}

@@ -17,13 +17,17 @@ void		free(void *ptr)
 {
 	void	*block;
 	t_meta	*data;
+	t_meta 	*prec;
 
-	if (!ptr || !(block = get_block_at(ptr)))
+	prec = NULL;
+	if (!ptr || !(block = find_block_at(ptr, &prec)))
 		return ;
 	data = get_meta(block);
 	set_meta(block, data->size, data->flags ^ INUSE, data->next);
 	if (data->flags & MMAPD)
 	{
+		if (prec)
+			prec->next = data->next;
 		munmap(block, data->size);
 	}
 }
