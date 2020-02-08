@@ -71,19 +71,71 @@ MU_TEST(free_test_multiple_free)
 	meta_b = get_meta(ptr_b - sizeof(t_meta));
 	meta_c = get_meta(ptr_c - sizeof(t_meta));
 
-	printf("ADRESSE TARGETED: %p\n", ptr_a);
 	free(ptr_a);
 	free(ptr_a);
-	printf("ADRESSE TARGETED: %p\n", ptr_b);
 	free(ptr_b);
 	free(ptr_b);
-	printf("ADRESSE TARGETED: %p\n", ptr_c);
 	free(ptr_c);
 	free(ptr_c);
 
 	mu_check(meta_a->flags == 0x0);
 	mu_check(meta_b->flags == 0x0);
-	mu_check(errno == EINVAL);
+	mu_check(munmap(ptr_c, 5000) == -1);
+}
+
+MU_TEST(free_test_prec_next_tiny)
+{
+	void	*ptr_a;
+	void	*ptr_b;
+	void	*ptr_c;
+
+	t_meta	*meta_a;
+	t_meta	*meta_b;
+	t_meta	*meta_c;
+
+	ptr_a = malloc(42);
+	ptr_b = malloc(42);
+	ptr_c = malloc(42);
+
+	meta_a = get_meta(ptr_a - sizeof(t_meta));
+	meta_b = get_meta(ptr_b - sizeof(t_meta));
+	meta_c = get_meta(ptr_c - sizeof(t_meta));
+
+	free(ptr_b);
+	mu_check(meta_a->next == meta_c);
+	free(ptr_c);
+	mu_check(meta_a->next == meta_c->next);
+	free(ptr_a);
+	mu_check(meta_a->flags == 0x0);
+}
+
+MU_TEST(free_test_prec_next_large)
+{
+	void	*ptr_a;
+	void	*ptr_b;
+	void	*ptr_c;
+
+	t_meta	*meta_a;
+	t_meta	*meta_b;
+	t_meta	*meta_c;
+
+	ptr_a = malloc(5000);
+	ptr_b = malloc(5000);
+	ptr_c = malloc(5000);
+
+	meta_a = get_meta(ptr_a - sizeof(t_meta));
+	meta_b = get_meta(ptr_b - sizeof(t_meta));
+	meta_c = get_meta(ptr_c - sizeof(t_meta));
+
+	mu_check(meta_b->next == meta_c);
+	free(ptr_b);
+	mu_check(meta_a->next == meta_c);
+	mu_check(meta_c->next == NULL);
+	free(ptr_c);
+	mu_check(meta_a->next == NULL);
+	free(ptr_a);
+	mu_check(munmap(ptr_a, 5000) == -1);
+
 }
 
 MU_TEST_SUITE(free_test_suite)
@@ -91,6 +143,8 @@ MU_TEST_SUITE(free_test_suite)
 	MU_RUN_TEST(free_test_invalid_pointer);
 	MU_RUN_TEST(free_test_valid_pointer);
 	MU_RUN_TEST(free_test_multiple_free);
+	MU_RUN_TEST(free_test_prec_next_tiny);
+	MU_RUN_TEST(free_test_prec_next_large);
 }
 
 int free_test()

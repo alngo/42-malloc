@@ -24,10 +24,8 @@ void		free(void *ptr)
 		return ;
 	data = get_meta(block);
 	set_meta(block, data->size, data->flags ^ INUSE, data->next);
+	if (prec)
+		prec->next = data->next;
 	if (data->flags & MMAPD)
-	{
-		if (prec)
-			prec->next = data->next;
 		munmap(block, data->size);
-	}
 }
