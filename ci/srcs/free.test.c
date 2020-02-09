@@ -83,32 +83,6 @@ MU_TEST(free_test_multiple_free)
 	mu_check(munmap(ptr_c, 5000) == -1);
 }
 
-MU_TEST(free_test_prec_next_tiny)
-{
-	void	*ptr_a;
-	void	*ptr_b;
-	void	*ptr_c;
-
-	t_meta	*meta_a;
-	t_meta	*meta_b;
-	t_meta	*meta_c;
-
-	ptr_a = malloc(42);
-	ptr_b = malloc(42);
-	ptr_c = malloc(42);
-
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
-	meta_b = get_meta(ptr_b - sizeof(t_meta));
-	meta_c = get_meta(ptr_c - sizeof(t_meta));
-
-	free(ptr_b);
-	mu_check(meta_a->next == meta_c);
-	free(ptr_c);
-	mu_check(meta_a->next == meta_c->next);
-	free(ptr_a);
-	mu_check(meta_a->flags == 0x0);
-}
-
 MU_TEST(free_test_prec_next_large)
 {
 	void	*ptr_a;
