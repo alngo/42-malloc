@@ -116,7 +116,6 @@ MU_TEST_SUITE(free_test_suite)
 	MU_RUN_TEST(free_test_invalid_pointer);
 	MU_RUN_TEST(free_test_valid_pointer);
 	MU_RUN_TEST(free_test_multiple_free);
-	MU_RUN_TEST(free_test_prec_next_tiny);
 	MU_RUN_TEST(free_test_prec_next_large);
 }
 
