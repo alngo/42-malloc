@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:22:43 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 17:46:10 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 18:13:39 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,48 @@ size_t			ft_strlen(const char *s)
 	return (us - s);
 }
 
-void			ft_putstr(const char *str, const char *end)
+void			ft_putstrend(const char *str, const char *end)
 {
 	write(1, str, ft_strlen(str));
 	write(1, end, ft_strlen(end));
 }
 
+char			*ft_itoa_base(size_t value, unsigned int base)
+{
+	char		*cipher;
+
+	cipher = "0123456789ABCDEF";
+	(void)value;
+	(void)base;
+	return ("[]");
+}
+
 void			print_allocation(const char *name, void *heap, size_t *acc)
 {
-	(void)acc;
 	void		*block;
+	void		*payload;
+	t_meta		*heap_data;
 	t_meta		*data;
 
-	ft_putstr(name, " : ");
+	ft_putstrend(name, " : ");
+	ft_putstrend(ft_itoa_base((size_t)heap, 16), "\n");
 	if (!heap)
-	{
-		ft_putstr("(null)", "\n");
 		return ;
+	heap_data = get_meta(heap);
+	block = (heap_data->flags & INUSE) ? heap : get_payload(heap);
+	while (block)
+	{
+		data = get_meta(block);
+		payload = get_payload(block);
+		if (data->flags & INUSE)
+		{
+			ft_putstrend(ft_itoa_base((size_t)payload, 16), " - ");
+			ft_putstrend(ft_itoa_base((size_t)payload + data->size, 16), " : ");
+			ft_putstrend(ft_itoa_base(data->size, 10), " octets\n");
+			*acc += data->size;
+		}
+		block = data->next;
 	}
-	data = get_meta(heap);
-	block = (data->flags & MMAPD) ? heap : get_payload(heap);
 }
 
 void			show_alloc_mem(void)
@@ -65,6 +87,6 @@ void			show_alloc_mem(void)
 		print_allocation(names[index], heaps[index], &acc);
 		index++;
 	}
-	ft_putstr("Total : ", "");
-	ft_putstr("\n", "");
+	ft_putstrend("Total : ", "");
+	ft_putstrend(ft_itoa_base(acc, 10), " octets\n");
 }
