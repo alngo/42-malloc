@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 12:44:19 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 13:20:15 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct		s_arena
 extern t_arena		g_arena;
 
 void				*malloc(size_t size);
+void				*realloc(void *ptr, size_t size);
 void				free(void *ptr);
 
 /*

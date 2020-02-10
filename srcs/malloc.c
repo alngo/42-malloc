@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:18:41 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 12:29:41 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 14:26:16 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		*malloc(size_t size)
 	else if (size <= SMALL)
 		block = get_block(&g_arena.small, size);
 	else
-		return (get_block(&g_arena.large, size));
+		block = get_block(&g_arena.large, size);
 	if (block)
 		return (get_payload(block));
 	return (NULL);
