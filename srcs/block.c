@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:03:38 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 17:46:17 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 11:58:30 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		*get_block(void **heap, size_t size)
 	return (get_block(&((t_meta *)(*heap))->next, size));
 }
 
-void		*get_block_at(void *ptr, void *heap, t_meta **prec)
+void		*extract_block_and_prec(void *ptr, void *heap, t_meta **prec)
 {
 	void	*block;
 	void	*block_payload;
@@ -91,7 +91,7 @@ void		*get_block_at(void *ptr, void *heap, t_meta **prec)
 	return (block);
 }
 
-void		*find_block_at(void *ptr, t_meta **prec)
+void		*get_block_at(void *ptr, t_meta **prec)
 {
 	uint8_t	index;
 	void	*heaps[3];
@@ -103,7 +103,7 @@ void		*find_block_at(void *ptr, t_meta **prec)
 	index = 0;
 	while (index < 3)
 	{
-		if ((target = get_block_at(ptr, heaps[index], prec)))
+		if ((target = extract_block_and_prec(ptr, heaps[index], prec)))
 			break ;
 		index++;
 	}

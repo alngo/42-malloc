@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/01/28 16:57:36 by alngo            ###   ########.fr        #
+#    Updated: 2020/02/10 12:07:51 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ INC_PATH := incs
 SRC_NAME := main.c \
 			malloc.test.c \
 			free.test.c \
+			realloc.test.c \
 			utils.test.c
 
 OBJ_NAME := $(SRC_NAME:.c=.o)

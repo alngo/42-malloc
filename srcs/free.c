@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:20:19 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/03 20:30:08 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 11:58:53 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		free(void *ptr)
 	t_meta 	*prec;
 
 	prec = NULL;
-	if (!ptr || !(block = find_block_at(ptr, &prec)))
+	if (!ptr || !(block = get_block_at(ptr, &prec)))
 		return ;
 	data = get_meta(block);
 	set_meta(block, data->size, data->flags ^ INUSE, data->next);

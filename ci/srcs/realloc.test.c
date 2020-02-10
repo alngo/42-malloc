@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   realloc.test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/27 10:38:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 12:05:37 by alngo            ###   ########.fr       */
+/*   Created: 2020/02/10 12:03:54 by alngo             #+#    #+#             */
+/*   Updated: 2020/02/10 12:08:14 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
+#include "test.h"
 
-#include "malloc.h"
-#include "minunit.h"
-#include <errno.h>
 
-extern int errno;
+MU_TEST(realloc_test_basics)
+{
+	mu_check(1 == 1);
+}
 
-int	utils_test();
-int	malloc_test();
-int realloc_test();
-int free_test();
+MU_TEST_SUITE(realloc_test_suite)
+{
+	MU_RUN_TEST(realloc_test_basics);
+}
 
-#endif
+int realloc_test()
+{
+	printf("Run realloc test suite:\n");
+	MU_RUN_SUITE(realloc_test_suite);
+	MU_REPORT();
+	return MU_EXIT_CODE;
+}
