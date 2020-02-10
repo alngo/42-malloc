@@ -6,18 +6,17 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:20:19 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 16:22:42 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 16:32:00 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-#include <stdio.h>
 
 void		free(void *ptr)
 {
 	void	*block;
 	t_meta	*data;
-	t_meta 	*prec;
+	t_meta	*prec;
 
 	prec = NULL;
 	if (!ptr || !(block = get_block_at(ptr, &prec)))

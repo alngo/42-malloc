@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:38:00 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 14:53:11 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 16:30:51 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ MU_TEST(malloc_test_xlarge)
 	mu_check(meta_a->flags == (INUSE | MMAPD));
 	mu_check(meta_a->next == NULL);
 
+	free(ptr_a);
 }
 
 MU_TEST_SUITE(malloc_test_suite)
