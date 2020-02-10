@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:03:38 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 14:56:22 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 16:22:05 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void		*get_block_at(void *ptr, t_meta **prec)
 	index = 0;
 	while (index < 3)
 	{
+		*prec = NULL;
 		if ((target = return_block_and_set_prec(ptr, heaps[index], prec)))
 			break ;
 		index++;
