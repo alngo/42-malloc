@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:20:19 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 11:58:53 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 14:55:29 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void		free(void *ptr)
 	{
 		if (prec)
 			prec->next = data->next;
+		else
+			g_arena.large = data->next;
 		munmap(block, data->size);
 	}
 }

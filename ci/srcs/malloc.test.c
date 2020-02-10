@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:38:00 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 12:38:01 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 14:53:11 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ MU_TEST(malloc_test_tiny)
 	mu_check(meta_zero->size == 0);
 	mu_check(meta_zero->flags == INUSE);
 	mu_check(meta_zero->next == ptr_zero);
+
+	free(ptr_a);
+	free(ptr_b);
+	free(ptr_zero);
 }
 
 MU_TEST(malloc_test_large)
@@ -74,6 +78,9 @@ MU_TEST(malloc_test_large)
 	mu_check(meta_b->size == 5000);
 	mu_check(meta_b->flags == (INUSE | MMAPD));
 	mu_check(meta_b->next == NULL);
+
+	free(ptr_a);
+	free(ptr_b);
 }
 
 MU_TEST(malloc_test_xlarge)
@@ -87,6 +94,7 @@ MU_TEST(malloc_test_xlarge)
 	mu_check(meta_a->size == INT_MAX);
 	mu_check(meta_a->flags == (INUSE | MMAPD));
 	mu_check(meta_a->next == NULL);
+
 }
 
 MU_TEST_SUITE(malloc_test_suite)

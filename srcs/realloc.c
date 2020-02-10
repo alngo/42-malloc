@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:21:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 14:33:14 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 14:47:53 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void 		*tiny_small_realloc(void *ptr, t_meta *data, size_t size)
 	}
 	return (new_ptr);
 }
-
 
 void		*large_realloc(void *ptr, t_meta *data, size_t size)
 {

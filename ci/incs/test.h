@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 10:38:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 12:05:37 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 14:44:23 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "malloc.h"
 #include "minunit.h"
 #include <errno.h>
+#include <stdlib.h>
 
 extern int errno;
 
