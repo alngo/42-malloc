@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 13:20:15 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 17:22:36 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef enum		e_malloc_mask
 typedef enum		e_malloc_type
 {
 	TINY = 128,
-	SMALL = 1024,
-	LARGE = 4096
+	SMALL = 4096,
+	LARGE = 4097
 }					t_malloc_type;
 
 typedef struct		s_meta
@@ -52,6 +52,7 @@ extern t_arena		g_arena;
 void				*malloc(size_t size);
 void				*realloc(void *ptr, size_t size);
 void				free(void *ptr);
+void				show_alloc_mem();
 
 /*
 ** block.c

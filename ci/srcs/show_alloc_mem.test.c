@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   show_alloc_mem.test.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/27 10:38:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 16:46:57 by alngo            ###   ########.fr       */
+/*   Created: 2020/02/10 16:47:49 by alngo             #+#    #+#             */
+/*   Updated: 2020/02/10 16:50:33 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
+#include "test.h"
 
-#include "malloc.h"
-#include "minunit.h"
-#include <errno.h>
-#include <stdlib.h>
+MU_TEST(show_alloc_mem_basic_test)
+{
+	show_alloc_mem();
+}
 
-extern int errno;
+MU_TEST_SUITE(show_alloc_mem_test_suite)
+{
+	MU_RUN_TEST(show_alloc_mem_basic_test);
+}
 
-int	utils_test();
-int	malloc_test();
-int realloc_test();
-int free_test();
-int show_alloc_mem_test();
-
-#endif
+int show_alloc_mem_test()
+{
+	printf("Run show_alloc_mem test suite:\n");
+	MU_RUN_SUITE(show_alloc_mem_test_suite);
+	MU_REPORT();
+	return MU_EXIT_CODE;
+}
