@@ -6,15 +6,17 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 14:50:22 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 16:04:35 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 16:34:41 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
-int main(int argc, char *argv[]) {
+int	main(int argc, char *argv[])
+{
 	utils_test();
 	malloc_test();
+	realloc_test();
 	free_test();
-	return MU_EXIT_CODE;
+	return (MU_EXIT_CODE);
 }

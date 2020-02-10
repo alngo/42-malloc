@@ -6,12 +6,11 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:03:38 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 17:46:17 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 16:28:09 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-#include <stdio.h>
 
 void		*first_fit(void *heap, size_t size)
 {
@@ -50,7 +49,7 @@ void		*large_fit(void *heap, size_t size)
 	if (heap_meta->flags & INUSE)
 		return (NULL);
 	set_meta(heap, size, INUSE | MMAPD, NULL);
-	return (get_payload(heap));
+	return (heap);
 }
 
 void		*get_block(void **heap, size_t size)
@@ -68,7 +67,7 @@ void		*get_block(void **heap, size_t size)
 	return (get_block(&((t_meta *)(*heap))->next, size));
 }
 
-void		*get_block_at(void *ptr, void *heap, t_meta **prec)
+void		*return_block_and_set_prec(void *ptr, void *heap, t_meta **prec)
 {
 	void	*block;
 	void	*block_payload;
@@ -85,13 +84,14 @@ void		*get_block_at(void *ptr, void *heap, t_meta **prec)
 		block_payload = get_payload(block);
 		if (block_payload == ptr && block_meta->flags & INUSE)
 			break ;
-		*prec = block_meta;
+		if (prec)
+			*prec = block_meta;
 		block = block_meta->next;
 	}
 	return (block);
 }
 
-void		*find_block_at(void *ptr, t_meta **prec)
+void		*get_block_at(void *ptr, t_meta **prec)
 {
 	uint8_t	index;
 	void	*heaps[3];
@@ -103,7 +103,9 @@ void		*find_block_at(void *ptr, t_meta **prec)
 	index = 0;
 	while (index < 3)
 	{
-		if ((target = get_block_at(ptr, heaps[index], prec)))
+		if (prec)
+			*prec = NULL;
+		if ((target = return_block_and_set_prec(ptr, heaps[index], prec)))
 			break ;
 		index++;
 	}

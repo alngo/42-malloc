@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 17:18:36 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 13:20:15 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct		s_arena
 extern t_arena		g_arena;
 
 void				*malloc(size_t size);
+void				*realloc(void *ptr, size_t size);
 void				free(void *ptr);
 
 /*
@@ -57,7 +58,7 @@ void				free(void *ptr);
 */
 
 void				*get_block(void **heap, size_t size);
-void				*find_block_at(void *ptr, t_meta **prec);
+void				*get_block_at(void *ptr, t_meta **prec);
 
 /*
 ** heap.c
@@ -75,5 +76,6 @@ t_meta				*get_meta(void *ptr);
 t_meta				*set_meta(void *ptr, size_t size,
 					unsigned char flags, void *next);
 size_t				size_alignment(size_t size, size_t alignment);
+void				*ft_memcpy(void *s1, const void *s2, size_t n);
 
 #endif
