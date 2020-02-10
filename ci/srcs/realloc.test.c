@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 12:03:54 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 16:27:59 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 16:36:13 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ MU_TEST(realloc_test_large_to_tiny)
 {
 	void	*ptr_a;
 	void	*ptr_b;
-
 	t_meta	*meta_a;
 	t_meta	*meta_b;
 
@@ -84,7 +83,6 @@ MU_TEST(realloc_test_greater_size)
 {
 	void	*ptr_a;
 	void	*ptr_b;
-
 	t_meta	*meta_a;
 	t_meta	*meta_b;
 
@@ -111,7 +109,6 @@ MU_TEST(realloc_test_slightly_greater_size)
 {
 	void	*ptr_a;
 	void	*ptr_b;
-
 	t_meta	*meta_a;
 	t_meta	*meta_b;
 
@@ -133,7 +130,6 @@ MU_TEST(realloc_test_lower_size)
 {
 	void	*ptr_a;
 	void	*ptr_b;
-
 	t_meta	*meta_a;
 	t_meta	*meta_b;
 
