@@ -6,59 +6,50 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/02/11 15:07:17 by alngo            ###   ########.fr        #
+#    Updated: 2020/02/11 15:23:49 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LFT := libft_malloc.so
 
-NAME := units.out
+NAME := tests42
 
 CC := gcc
-CFLAGS := 
+CFLAGS :=
 
-42_TEST_PATH := tests42
 SRC_PATH := srcs
-OBJ_PATH := objs
 INC_PATH := incs
-SRC_NAME := main.c \
-			malloc.test.c \
-			free.test.c \
-			realloc.test.c \
-			show_alloc_mem.test.c \
-			utils.test.c
+OUT_PATH := out
+SRC_NAME := test0.c \
+			test1.c \
+			test2.c \
+			test3.c \
+			test3bis.c \
+			test4.c \
+			test5.c
 
-OBJ_NAME := $(SRC_NAME:.c=.o)
+OUT_NAME := $(SRC_NAME:.c=)
 
-SRC := $(addprefix $(SRC_PATH)/,$(SRC_NAME))
-OBJ := $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+SRC := $(addprefix $(OUT_PATH)/,$(OUT_NAME))
 
-.PHONY: all clean fclean re run
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(OBJ_PATH) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -I $(INC_PATH)/ -I ../$(INC_PATH)/ \
-	   ../$(LFT) -o $(NAME)
+$(NAME): $(OUT_PATH) $(SRC)
 
 test: $(NAME)
-	./units.sh
-	make test -C $(42_TEST_PATH)/
+	./run_tests.sh
 
-$(OBJ_PATH):
-	@mkdir $(OBJ_PATH) 2> /dev/null || true
+$(OUT_PATH):
+	@mkdir $(OUT_PATH) 2> /dev/null || true
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	$(CC) $(CFLAGS) -I $(INC_PATH)/ -I ../$(INC_PATH)/ -MMD -MP -c $< -o $@
+$(OUT_PATH)/%: $(SRC_PATH)/%.c
+	$(CC) $(CFLAGS) -I ../../$(INC_PATH) ../../$(LFT) $< -o $@
 
 clean:
-	make clean -C $(42_TEST_PATH)
-	$(RM) -r $(OBJ_PATH)
+	$(RM) -r $(OUT_PATH)
 
-fclean:	clean
-	make fclean -C $(42_TEST_PATH)
-	$(RM) -r $(NAME)
+fclean: clean
 
-re:	fclean all
-
--include $(OBJ:.o=.d)
+re: fclean all
