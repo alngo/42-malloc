@@ -1,12 +1,17 @@
 #!/bin/sh
 
-lft=../libft_malloc.so
+lft=../../libft_malloc.so
 out=./out
 
 echo "==================================="
 echo "nm $lft"
 echo "==================================="
 /usr/bin/nm $lft
+
+echo "==================================="
+echo "nm $lft | egrep --color '(malloc|free|realloc|show_alloc_mem)$" 
+echo "==================================="
+/usr/bin/nm $lft | egrep --color '(malloc|free|realloc|show_alloc_mem)$'
 
 echo "==================================="
 echo "/usr/bin/time -l $out/test0"
