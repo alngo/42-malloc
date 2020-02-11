@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 17:22:36 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/11 16:12:35 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void				*get_block_at(void *ptr, t_meta **prec);
 ** heap.c
 */
 
-size_t				get_heap_size(size_t size);
 void				*init_heap(size_t size);
 
 /*
@@ -78,5 +77,13 @@ t_meta				*set_meta(void *ptr, size_t size,
 					unsigned char flags, void *next);
 size_t				size_alignment(size_t size, size_t alignment);
 void				*ft_memcpy(void *s1, const void *s2, size_t n);
+
+/*
+** out.c
+*/
+
+void				ft_putstr(const char *str);
+void				ft_put2str(const char *str1, const char *str2);
+char				*ft_putnbr(size_t value, unsigned int base);
 
 #endif

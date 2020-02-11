@@ -6,37 +6,22 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:22:43 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 18:13:39 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/11 16:16:39 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 #include <stdio.h>
 
-size_t			ft_strlen(const char *s)
+void			print_block(void *payload, t_meta *data)
 {
-	const char	*us;
-
-	us = s;
-	while (*us)
-		us++;
-	return (us - s);
-}
-
-void			ft_putstrend(const char *str, const char *end)
-{
-	write(1, str, ft_strlen(str));
-	write(1, end, ft_strlen(end));
-}
-
-char			*ft_itoa_base(size_t value, unsigned int base)
-{
-	char		*cipher;
-
-	cipher = "0123456789ABCDEF";
-	(void)value;
-	(void)base;
-	return ("[]");
+	ft_putnbr((size_t)payload, 16);
+	ft_putstr(" - ");
+	ft_putnbr((size_t)payload, 16);
+	ft_putnbr((size_t)payload + data->size, 16);
+	ft_putstr(" : ");
+	ft_putnbr(data->size, 10);
+	ft_putstr(" octets\n");
 }
 
 void			print_allocation(const char *name, void *heap, size_t *acc)
@@ -46,8 +31,9 @@ void			print_allocation(const char *name, void *heap, size_t *acc)
 	t_meta		*heap_data;
 	t_meta		*data;
 
-	ft_putstrend(name, " : ");
-	ft_putstrend(ft_itoa_base((size_t)heap, 16), "\n");
+	ft_put2str(name, " : ");
+	ft_putnbr((size_t)heap, 16);
+	ft_putstr("\n");
 	if (!heap)
 		return ;
 	heap_data = get_meta(heap);
@@ -58,13 +44,13 @@ void			print_allocation(const char *name, void *heap, size_t *acc)
 		payload = get_payload(block);
 		if (data->flags & INUSE)
 		{
-			ft_putstrend(ft_itoa_base((size_t)payload, 16), " - ");
-			ft_putstrend(ft_itoa_base((size_t)payload + data->size, 16), " : ");
-			ft_putstrend(ft_itoa_base(data->size, 10), " octets\n");
+			print_block(payload, data);
 			*acc += data->size;
 		}
 		block = data->next;
 	}
+	if (heap_data->next)
+		print_allocation(name, heap_data->next, acc);
 }
 
 void			show_alloc_mem(void)
@@ -87,6 +73,7 @@ void			show_alloc_mem(void)
 		print_allocation(names[index], heaps[index], &acc);
 		index++;
 	}
-	ft_putstrend("Total : ", "");
-	ft_putstrend(ft_itoa_base(acc, 10), " octets\n");
+	ft_put2str("Total : ", "");
+	ft_putnbr(acc, 10);
+	ft_putstr(" octets\n");
 }
