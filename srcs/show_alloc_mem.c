@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:22:43 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/11 16:16:39 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/11 16:25:00 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void			print_block(void *payload, t_meta *data)
 {
 	ft_putnbr((size_t)payload, 16);
 	ft_putstr(" - ");
-	ft_putnbr((size_t)payload, 16);
 	ft_putnbr((size_t)payload + data->size, 16);
 	ft_putstr(" : ");
 	ft_putnbr(data->size, 10);
