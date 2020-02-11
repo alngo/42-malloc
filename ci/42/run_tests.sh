@@ -9,9 +9,9 @@ echo "==================================="
 /usr/bin/nm $lft
 
 echo "==================================="
-echo "nm $lft | egrep --color '(malloc|free|realloc|show_alloc_mem)$" 
+echo "nm $lft | egrep --color 'T _(malloc|free|realloc|show_alloc_mem)$'" 
 echo "==================================="
-/usr/bin/nm $lft | egrep --color '(malloc|free|realloc|show_alloc_mem)$'
+/usr/bin/nm $lft | egrep --color 'T _(malloc|free|realloc|show_alloc_mem)$'
 
 echo "==================================="
 echo "/usr/bin/time -l $out/test0"

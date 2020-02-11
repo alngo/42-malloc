@@ -44,8 +44,8 @@ all: $(NAME)
 
 $(NAME): $(OBJ_PATH) $(OBJ)
 	@echo "libft_malloc compilation..."
-	@ar r $(NAME) $(OBJ)
-	@ranlib $(NAME)
+	$(CC) $(CFLAGS) -shared -o $(NAME) $(OBJ)
+	@ar r $(NAME)
 	@ln -s $(NAME) $(SLNK) 2> /dev/null || true
 	@echo "Done"
 
