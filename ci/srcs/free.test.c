@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 15:55:07 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 16:35:22 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 18:13:27 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@
 MU_TEST(free_test_invalid_pointer)
 {
 	void	*ptr_null;
+	void	*ptr;
 	void	*ptr_shifted;
 
-	ptr_shifted = malloc(42) + 21;
+	ptr = malloc(42);
+	ptr_shifted = ptr + 21;
 	free(ptr_null);
 	free(ptr_shifted);
 	free(NULL);
+	free(ptr);
 }
 
 MU_TEST(free_test_valid_pointer)

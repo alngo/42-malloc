@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 10:38:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 14:44:23 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/10 16:46:57 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	utils_test();
 int	malloc_test();
 int realloc_test();
 int free_test();
+int show_alloc_mem_test();
 
 #endif
