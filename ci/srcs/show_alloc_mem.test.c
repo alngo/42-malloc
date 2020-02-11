@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 16:47:49 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/11 16:23:15 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/11 16:44:28 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ MU_TEST(show_alloc_mem_42_test)
 	free(addr3);
 	free(addr4);
 	free(addr5);
+
+	printf("--------------------------------\n");
+	show_alloc_mem();
+	printf("--------------------------------\n");
 }
 
 MU_TEST(show_alloc_mem_basic_test)

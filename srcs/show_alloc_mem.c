@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:22:43 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/11 16:25:00 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/11 16:44:05 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			print_allocation(const char *name, void *heap, size_t *acc)
 		}
 		block = data->next;
 	}
-	if (heap_data->next)
+	if (heap_data->next && heap_data->flags != (INUSE | MMAPD))
 		print_allocation(name, heap_data->next, acc);
 }
 
