@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 16:47:49 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/11 16:44:28 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/11 16:48:01 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 MU_TEST(show_alloc_mem_42_test)
 {
+	void	*addr0;
 	void	*addr1;
 	void	*addr2;
 	void	*addr3;
 	void	*addr4;
 	void	*addr5;
 
+	addr0 = malloc(42);
 	addr1 = malloc(1024);
 	addr2 = malloc(1024 * 32);
 	addr3 = malloc(1024 * 1024);
@@ -30,6 +32,7 @@ MU_TEST(show_alloc_mem_42_test)
 	show_alloc_mem();
 	printf("--------------------------------\n");
 
+	free(addr0);
 	free(addr1);
 	free(addr2);
 	free(addr3);
