@@ -6,16 +6,19 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/02/10 16:36:57 by alngo            ###   ########.fr        #
+#    Updated: 2020/02/11 15:10:08 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := 42tests
+LFT := libft_malloc.so
+
+NAME := tests42
 
 CC := gcc
 CFLAGS :=
 
-SRC_PATH := ./
+SRC_PATH := srcs
+INC_PATH := incs
 OUT_PATH := out
 SRC_NAME := test0.c \
 			test1.c \
@@ -35,11 +38,14 @@ all: $(NAME)
 
 $(NAME): $(OUT_PATH) $(SRC)
 
+test: $(NAME)
+	./run_tests.sh
+
 $(OUT_PATH):
 	@mkdir $(OUT_PATH) 2> /dev/null || true
 
 $(OUT_PATH)/%: $(SRC_PATH)/%.c
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) -I ../../$(INC_PATH) ../../$(LFT) $< -o $@
 
 clean:
 	$(RM) -r $(OUT_PATH)
