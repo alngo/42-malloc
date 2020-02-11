@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 13:20:15 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/11 16:12:35 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef enum		e_malloc_mask
 typedef enum		e_malloc_type
 {
 	TINY = 128,
-	SMALL = 1024,
-	LARGE = 4096
+	SMALL = 4096,
+	LARGE = 4097
 }					t_malloc_type;
 
 typedef struct		s_meta
@@ -52,6 +52,7 @@ extern t_arena		g_arena;
 void				*malloc(size_t size);
 void				*realloc(void *ptr, size_t size);
 void				free(void *ptr);
+void				show_alloc_mem();
 
 /*
 ** block.c
@@ -64,7 +65,6 @@ void				*get_block_at(void *ptr, t_meta **prec);
 ** heap.c
 */
 
-size_t				get_heap_size(size_t size);
 void				*init_heap(size_t size);
 
 /*
@@ -77,5 +77,13 @@ t_meta				*set_meta(void *ptr, size_t size,
 					unsigned char flags, void *next);
 size_t				size_alignment(size_t size, size_t alignment);
 void				*ft_memcpy(void *s1, const void *s2, size_t n);
+
+/*
+** out.c
+*/
+
+void				ft_putstr(const char *str);
+void				ft_put2str(const char *str1, const char *str2);
+char				*ft_putnbr(size_t value, unsigned int base);
 
 #endif

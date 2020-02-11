@@ -1,8 +1,7 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
+#    Makefile                                           :+:      :+:    :+:    # #                                                     +:+ +:+         +:+      #
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
@@ -25,12 +24,13 @@ CFLAGS := -Wall -Wextra -Werror
 SRC_PATH := srcs
 OBJ_PATH := objs
 INC_PATH := incs
-SRC_NAME := 	malloc.c	\
-				free.c		\
-				realloc.c 	\
-				show_alloc_mem.c \
-				utils.c		\
-				heap.c		\
+SRC_NAME := 	malloc.c			\
+				free.c				\
+				realloc.c 			\
+				show_alloc_mem.c 	\
+				utils.c				\
+				heap.c				\
+				out.c				\
 				block.c
 
 OBJ_NAME := $(SRC_NAME:.c=.o)

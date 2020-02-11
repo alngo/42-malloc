@@ -25,6 +25,7 @@ SRC_NAME := main.c \
 			malloc.test.c \
 			free.test.c \
 			realloc.test.c \
+			show_alloc_mem.test.c \
 			utils.test.c
 
 OBJ_NAME := $(SRC_NAME:.c=.o)
