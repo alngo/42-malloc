@@ -38,7 +38,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_PATH) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -I $(INC_PATH)/ -I ../$(INC_PATH)/ \
-	   ../$(LFT) -o $(NAME)
+		../$(LFT) -o $(NAME)
 
 test: $(NAME)
 	./units.sh

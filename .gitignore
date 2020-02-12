@@ -55,4 +55,4 @@ dkms.conf
 *.vim
 *.swp
 *.DS_Store
-**/*out/
+**/*outs/

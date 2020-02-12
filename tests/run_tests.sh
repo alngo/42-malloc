@@ -60,6 +60,8 @@ echo "==================================="
 ./run.sh $out/test4
 
 echo "==================================="
+echo "export DYLD_LIBRARY_PATH=../"
 echo "./run.sh /usr/bin/time -l $out/test5"
 echo "==================================="
+export DYLD_LIBRARY_PATH=../
 ./$out/test5
