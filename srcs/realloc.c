@@ -12,6 +12,19 @@
 
 #include "malloc.h"
 
+void		*realloc_large(void *ptr, t_meta *data, size_t size)
+{
+	void	*new_ptr;
+
+	if (size == data->size)
+		return (ptr);
+	if (!(new_ptr = malloc(size)))
+		return (NULL);
+	ft_memcpy(new_ptr, ptr, size);
+	free(ptr);
+	return (new_ptr);
+}
+
 void		*realloc_tiny_small(void *ptr, t_meta *data, size_t size)
 {
 	void	*block;
@@ -35,19 +48,6 @@ void		*realloc_tiny_small(void *ptr, t_meta *data, size_t size)
 		ft_memcpy(new_ptr, ptr, size);
 		free(ptr);
 	}
-	return (new_ptr);
-}
-
-void		*realloc_large(void *ptr, t_meta *data, size_t size)
-{
-	void	*new_ptr;
-
-	if (size == data->size)
-		return (ptr);
-	if (!(new_ptr = malloc(size)))
-		return (NULL);
-	ft_memcpy(new_ptr, ptr, size);
-	free(ptr);
 	return (new_ptr);
 }
 

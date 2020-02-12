@@ -71,6 +71,8 @@ void				*fit_block(void **heap, size_t size);
 */
 
 void				*init_heap(size_t size);
+uint8_t 			is_empty_heap(void *heap);
+void 				delete_heap(void *heap);
 
 /*
 ** utils.c

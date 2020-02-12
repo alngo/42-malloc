@@ -11,16 +11,21 @@
 /* ************************************************************************** */
 
 #include "malloc.h"
+#include <stdio.h>
 
 void		free(void *ptr)
 {
 	void	*block;
 	void 	*heap;
 	t_meta	*data;
+	uint8_t is_large;
 
 	heap = NULL;
 	if (!ptr || !(block = get_block(ptr, &heap)))
 		return ;
 	data = get_meta(block);
-	set_meta(block, data->size, data->flags ^ INUSE, data->next);
+	is_large = data->flags == (INUSE | MMAPD);
+	set_meta(data, data->size, data->flags ^ INUSE, data->next);
+	if (is_empty_heap(is_large ? heap : get_payload(heap)))
+		delete_heap(heap);
 }
