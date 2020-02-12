@@ -50,9 +50,9 @@ echo "==================================="
 ./run.sh $out/test3
 
 echo "==================================="
-echo "./run.sh /usr/bin/time -l $out/test3bis"
+echo "./run.sh /usr/bin/time -l $out/test3b"
 echo "==================================="
-./run.sh $out/test3bis
+./run.sh $out/test3b
 
 echo "==================================="
 echo "./run.sh /usr/bin/time -l $out/test4"
