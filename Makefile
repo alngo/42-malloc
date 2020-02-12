@@ -53,7 +53,7 @@ $(OBJ_PATH):
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	$(CC) $(CFLAGS) -I $(INC_PATH)/ -MMD -MP -c $< -o $@
+	$(CC) $(CFLAGS) -I $(INC_PATH)/ -MMD -MP -c -fPIC $< -o $@
 
 clean:
 	make clean -C ci/
