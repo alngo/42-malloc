@@ -24,7 +24,7 @@ void		*fit_block_tiny_small(void *heap, size_t size)
 			{
 				aligned_size = size_alignment(size, sizeof(void *));
 				next = block + sizeof(t_meta) + aligned_size;
-				if (next > (heap + meta(heap)->size))
+				if (next > (heap + sizeof(t_meta) + meta(heap)->size))
 					next = NULL;
 				set_meta(block, size, INUSE, next);
 				break ;
