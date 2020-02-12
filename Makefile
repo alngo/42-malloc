@@ -1,7 +1,8 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    # #                                                     +:+ +:+         +:+      #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
@@ -38,15 +39,14 @@ OBJ_NAME := $(SRC_NAME:.c=.o)
 SRC := $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ := $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re test ci
 
 all: $(NAME)
 
 $(NAME): $(OBJ_PATH) $(OBJ)
 	@echo "libft_malloc compilation..."
-	$(CC) $(CFLAGS) -shared -o $(NAME) $(OBJ)
-	@ar r $(NAME)
-	@ln -s $(NAME) $(SLNK) 2> /dev/null || true
+	$(CC) $(CFLAGS) -shared -fPIC -o $(NAME) $(OBJ)
+	@ln -sf $(NAME) $(SLNK) 2> /dev/null || true
 	@echo "Done"
 
 $(OBJ_PATH):
@@ -57,15 +57,20 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 
 clean:
 	make clean -C ci/
+	make clean -C tests/
 	$(RM) -r $(OBJ_PATH)
 
 fclean:	clean
 	make fclean -C ci/
+	make fclean -C tests/
 	$(RM) -r $(NAME)
 	$(RM) -r $(SLNK)
 
-test: $(NAME)
+ci: $(NAME)
 	make test -C ci/
+
+test: $(NAME)
+	make -C tests/
 
 re:	fclean all
 

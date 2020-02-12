@@ -17,7 +17,6 @@ NAME := units.out
 CC := gcc
 CFLAGS := 
 
-42_TEST_PATH := 42
 SRC_PATH := srcs
 OBJ_PATH := objs
 INC_PATH := incs
@@ -42,7 +41,6 @@ $(NAME): $(OBJ_PATH) $(OBJ)
 	   ../$(LFT) -o $(NAME)
 
 test: $(NAME)
-	make test -C $(42_TEST_PATH)/
 	./units.sh
 
 $(OBJ_PATH):
@@ -52,11 +50,9 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	$(CC) $(CFLAGS) -I $(INC_PATH)/ -I ../$(INC_PATH)/ -MMD -MP -c $< -o $@
 
 clean:
-	make clean -C $(42_TEST_PATH)
 	$(RM) -r $(OBJ_PATH)
 
 fclean:	clean
-	make fclean -C $(42_TEST_PATH)
 	$(RM) -r $(NAME)
 
 re:	fclean all
