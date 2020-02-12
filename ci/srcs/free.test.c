@@ -37,21 +37,27 @@ MU_TEST(free_test_valid_pointer)
 	t_meta	*meta_c;
 
 	ptr_a = malloc(42);
-	ptr_b = malloc(1000);
+	ptr_b = malloc(1024);
 	ptr_c = malloc(5000);
 
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
-	meta_b = get_meta(ptr_b - sizeof(t_meta));
-	meta_c = get_meta(ptr_c - sizeof(t_meta));
+	meta_a = meta(ptr_a - sizeof(t_meta));
+	meta_b = meta(ptr_b - sizeof(t_meta));
+	meta_c = meta(ptr_c - sizeof(t_meta));
+
+	mu_check(meta_a->flags == INUSE);
+	mu_check(meta_b->flags == INUSE);
+	mu_check(meta_c->flags == (INUSE | MMAPD));
+	mu_check(g_arena.tiny != NULL);
+	mu_check(g_arena.small != NULL);
+	mu_check(g_arena.large != NULL);
 
 	free(ptr_a);
 	free(ptr_b);
 	free(ptr_c);
 
-	mu_check(meta_a->flags == 0x0);
-	mu_check(meta_b->flags == 0x0);
-	msync(meta_c, 5000, 0);
-	mu_check(errno == ENOMEM);
+	mu_check(g_arena.tiny == NULL);
+	mu_check(g_arena.small == NULL);
+	mu_check(g_arena.large == NULL);
 }
 
 MU_TEST(free_test_multiple_free)
@@ -64,12 +70,19 @@ MU_TEST(free_test_multiple_free)
 	t_meta	*meta_c;
 
 	ptr_a = malloc(42);
-	ptr_b = malloc(1000);
+	ptr_b = malloc(1024);
 	ptr_c = malloc(5000);
 
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
-	meta_b = get_meta(ptr_b - sizeof(t_meta));
-	meta_c = get_meta(ptr_c - sizeof(t_meta));
+	meta_a = meta(ptr_a - sizeof(t_meta));
+	meta_b = meta(ptr_b - sizeof(t_meta));
+	meta_c = meta(ptr_c - sizeof(t_meta));
+
+	mu_check(meta_a->flags == INUSE);
+	mu_check(meta_b->flags == INUSE);
+	mu_check(meta_c->flags == (INUSE | MMAPD));
+	mu_check(g_arena.tiny != NULL);
+	mu_check(g_arena.small != NULL);
+	mu_check(g_arena.large != NULL);
 
 	free(ptr_a);
 	free(ptr_a);
@@ -78,9 +91,9 @@ MU_TEST(free_test_multiple_free)
 	free(ptr_c);
 	free(ptr_c);
 
-	mu_check(meta_a->flags == 0x0);
-	mu_check(meta_b->flags == 0x0);
-	mu_check(munmap(ptr_c, 5000) == -1);
+	mu_check(g_arena.tiny == NULL);
+	mu_check(g_arena.small == NULL);
+	mu_check(g_arena.large == NULL);
 }
 
 MU_TEST(free_test_prec_next_large)
@@ -96,9 +109,9 @@ MU_TEST(free_test_prec_next_large)
 	ptr_b = malloc(5000);
 	ptr_c = malloc(5000);
 
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
-	meta_b = get_meta(ptr_b - sizeof(t_meta));
-	meta_c = get_meta(ptr_c - sizeof(t_meta));
+	meta_a = meta(ptr_a - sizeof(t_meta));
+	meta_b = meta(ptr_b - sizeof(t_meta));
+	meta_c = meta(ptr_c - sizeof(t_meta));
 
 	mu_check(meta_b->next == meta_c);
 	free(ptr_b);
@@ -107,7 +120,7 @@ MU_TEST(free_test_prec_next_large)
 	free(ptr_c);
 	mu_check(meta_a->next == NULL);
 	free(ptr_a);
-	mu_check(munmap(ptr_a, 5000) == -1);
+	mu_check(g_arena.large == NULL);
 }
 
 MU_TEST_SUITE(free_test_suite)

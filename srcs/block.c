@@ -15,23 +15,17 @@
 void 		*get_block_large(void *ptr, void *start, void **heap)
 {
 	void 	*page;
-	void 	*payload;
-	t_meta 	*data;
 
 	page = start;
-	data = get_meta(page);
-	payload = get_payload(page);
 	while (page)
 	{
-		if (payload == ptr && data->flags & INUSE)
+		if (payload(page) == ptr && meta(page)->flags & INUSE)
 		{
 			if (heap)
 				*heap = page;
 			return (page);
 		}
-		page = data->next;
-		data = get_meta(page);
-		payload = get_payload(page);
+		page = meta(page)->next;
 	}
 	return (NULL);
 }
@@ -39,31 +33,24 @@ void 		*get_block_large(void *ptr, void *start, void **heap)
 void 		*get_block_tiny_small(void *ptr, void *start, void **heap)
 {
 	void 	*block;
-	void 	*payload;
 	void 	*page;
-	t_meta 	*p_data;
-	t_meta 	*data;
 
 	page = start;
-	p_data = get_meta(page);
-	block = get_payload(page);
+	block = payload(page);
 	while (page)
 	{
 		while (block)
 		{
-			data = get_meta(block);
-			payload = get_payload(block);
-			if (payload == ptr && data->flags & INUSE)
+			if (payload(block) == ptr && meta(block)->flags & INUSE)
 			{
 				if (heap)
 					*heap = page;
 				return (block);
 			}
-			block = data->next;
+			block = meta(block)->next;
 		}
-		page = p_data->next;
-		p_data = get_meta(page);
-		block = get_payload(page);
+		page = meta(page)->next;
+		block = payload(page);
 	}
 	return (NULL);
 }
@@ -73,11 +60,11 @@ void		*get_block(void *ptr, void **heap)
 	void	*target;
 
 	target = NULL;
-	if ((target = get_block_tiny_small(ptr, &g_arena.tiny, heap)))
+	if ((target = get_block_tiny_small(ptr, g_arena.tiny, heap)))
 		return (target);
-	else if ((target = get_block_tiny_small(ptr, &g_arena.small, heap)))
+	else if ((target = get_block_tiny_small(ptr, g_arena.small, heap)))
 		return (target);
-	else if ((target = get_block_large(ptr, &g_arena.large, heap)))
+	else if ((target = get_block_large(ptr, g_arena.large, heap)))
 		return (target);
 	return (NULL);
 }

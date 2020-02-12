@@ -12,12 +12,12 @@
 
 #include "malloc.h"
 
-t_meta		*get_meta(void *ptr)
+t_meta		*meta(void *ptr)
 {
 	return ((t_meta *)ptr);
 }
 
-void		*get_payload(void *ptr)
+void		*payload(void *ptr)
 {
 	return (ptr + sizeof(t_meta));
 }

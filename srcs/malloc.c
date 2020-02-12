@@ -27,6 +27,6 @@ void		*malloc(size_t size)
 	else
 		block = fit_block(&g_arena.large, size);
 	if (block)
-		return (get_payload(block));
+		return (payload(block));
 	return (NULL);
 }

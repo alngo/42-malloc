@@ -78,12 +78,12 @@ MU_TEST(utils_test_set_meta)
 MU_TEST(utils_test_get_payload)
 {
 	void	*ptr;
-	void	*payload;
+	void	*pay;
 
 	ptr = xalloc();
-	payload = get_payload(ptr);
+	pay = payload(ptr);
 
-	mu_check(payload == ptr + sizeof(t_meta));
+	mu_check(pay == ptr + sizeof(t_meta));
 
 	xfree(ptr);
 }

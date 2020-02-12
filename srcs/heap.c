@@ -31,7 +31,7 @@ void		*init_heap(size_t size)
 	if ((ptr = mmap(ptr, heap_size, PROT_READ | PROT_WRITE,
 					MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED)
 		return (NULL);
-	set_meta(ptr, heap_size, MMAPD, NULL);
+	set_meta(ptr, heap_size - offset, MMAPD, NULL);
 	return (ptr);
 }
 
@@ -39,20 +39,16 @@ void 		*get_heap_surrounding(void *start, void *heap,
 		void **prec, void **next)
 {
 	void 	*page;
-	t_meta 	*data;
 
-	*prec = NULL;
 	page = start;
-	data = get_meta(page);
-	*next = data->next;
+	*prec = NULL;
 	while (page)
 	{
+		*next = meta(page)->next;
 		if (page == heap)
 			return (page);
-		*prec = page;
-		page = data->next;
-		data = get_meta(page);
-		*next = data->next;
+		*prec = meta(page);
+		page = meta(page)->next;
 	}
 	return (NULL);
 }
@@ -60,18 +56,15 @@ void 		*get_heap_surrounding(void *start, void *heap,
 uint8_t 	is_empty_heap(void *payload)
 {
 	void 	*block;
-	t_meta 	*data;
 
 	block = payload;
-	data = get_meta(block);
 	while (block)
 	{
-		if (data->flags == MMAPD)
+		if (meta(block)->flags == MMAPD)
 			return (1);
-		if (data->flags & INUSE)
+		if (meta(block)->flags & INUSE)
 			return (0);
-		block = data->next;
-		data = get_meta(block);
+		block = meta(block)->next;
 	}
 	return (1);
 }
@@ -82,17 +75,25 @@ void 		delete_heap(void *heap)
 	void 	*next;
 	void 	*target;
 
+	prec = NULL;
+	next = NULL;
 	target = NULL;
-	if ((target = get_heap_surrounding(&g_arena.tiny, heap, &prec, &next)))
+	if ((target = get_heap_surrounding(g_arena.tiny, heap, &prec, &next)))
+	{
 		if (!prec)
-			g_arena.tiny = NULL;
-	if ((target = get_heap_surrounding(&g_arena.small, heap, &prec, &next)))
+			g_arena.tiny = next;
+	}
+	else if ((target = get_heap_surrounding(g_arena.small, heap, &prec, &next)))
+	{
 		if (!prec)
-			g_arena.small = NULL;
-	if ((target = get_heap_surrounding(&g_arena.large, heap, &prec, &next)))
+			g_arena.small = next;
+	}
+	else if ((target = get_heap_surrounding(g_arena.large, heap, &prec, &next)))
+	{
 		if (!prec)
-			g_arena.large = NULL;
+			g_arena.large = next;
+	}
 	if (prec)
-		get_meta(prec)->next = next;
-	munmap(heap, get_meta(heap)->size);
+		meta(prec)->next = next;
+	munmap(heap, meta(heap)->size + sizeof(t_meta));
 }
