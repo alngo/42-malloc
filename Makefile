@@ -32,7 +32,8 @@ SRC_NAME := 	malloc.c			\
 				utils.c				\
 				heap.c				\
 				out.c				\
-				block.c
+				block.c 			\
+				fit.c
 
 OBJ_NAME := $(SRC_NAME:.c=.o)
 

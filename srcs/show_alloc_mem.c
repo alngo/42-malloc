@@ -26,30 +26,24 @@ void			print_block(void *payload, t_meta *data)
 void			print_allocation(const char *name, void *heap, size_t *acc)
 {
 	void		*block;
-	void		*payload;
-	t_meta		*heap_data;
-	t_meta		*data;
 
 	ft_put2str(name, " : ");
 	ft_putnbr((size_t)heap, 16);
 	ft_putstr("\n");
 	if (!heap)
 		return ;
-	heap_data = get_meta(heap);
-	block = (heap_data->flags & INUSE) ? heap : get_payload(heap);
+	block = (meta(heap)->flags & INUSE) ? heap : payload(heap);
 	while (block)
 	{
-		data = get_meta(block);
-		payload = get_payload(block);
-		if (data->flags & INUSE)
+		if (meta(block)->flags & INUSE)
 		{
-			print_block(payload, data);
-			*acc += data->size;
+			print_block(payload(block), meta(block));
+			*acc += meta(block)->size;
 		}
-		block = data->next;
+		block = meta(block)->next;
 	}
-	if (heap_data->next && heap_data->flags != (INUSE | MMAPD))
-		print_allocation(name, heap_data->next, acc);
+	if (meta(heap)->next && meta(heap)->flags != (INUSE | MMAPD))
+		print_allocation(name, meta(heap)->next, acc);
 }
 
 void			show_alloc_mem(void)

@@ -58,21 +58,28 @@ void				show_alloc_mem();
 ** block.c
 */
 
-void				*get_block(void **heap, size_t size);
-void				*get_block_at(void *ptr, t_meta **prec);
+void				*get_block(void *ptr, void **heap);
+
+/*
+** fit.c
+*/
+
+void				*fit_block(void **heap, size_t size);
 
 /*
 ** heap.c
 */
 
 void				*init_heap(size_t size);
+uint8_t 			is_empty_heap(void *heap);
+void 				delete_heap(void *heap);
 
 /*
 ** utils.c
 */
 
-void				*get_payload(void *ptr);
-t_meta				*get_meta(void *ptr);
+void				*payload(void *ptr);
+t_meta				*meta(void *ptr);
 t_meta				*set_meta(void *ptr, size_t size,
 					unsigned char flags, void *next);
 size_t				size_alignment(size_t size, size_t alignment);

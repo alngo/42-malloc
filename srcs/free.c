@@ -15,20 +15,15 @@
 void		free(void *ptr)
 {
 	void	*block;
-	t_meta	*data;
-	t_meta	*prec;
+	void 	*heap;
+	uint8_t is_large;
 
-	prec = NULL;
-	if (!ptr || !(block = get_block_at(ptr, &prec)))
+	heap = NULL;
+	if (!ptr || !(block = get_block(ptr, &heap)))
 		return ;
-	data = get_meta(block);
-	set_meta(block, data->size, data->flags ^ INUSE, data->next);
-	if (data->flags & MMAPD)
-	{
-		if (prec)
-			prec->next = data->next;
-		else
-			g_arena.large = data->next;
-		munmap(block, data->size);
-	}
+	is_large = meta(block)->flags == (INUSE | MMAPD);
+	set_meta(meta(block), meta(block)->size,
+			meta(block)->flags ^ INUSE, meta(block)->next);
+	if (is_empty_heap(is_large ? heap : payload(heap)))
+		delete_heap(heap);
 }
