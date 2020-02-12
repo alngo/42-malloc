@@ -21,11 +21,11 @@ void		*malloc(size_t size)
 	if (size > (~(size_t)0 >> 3))
 		return (NULL);
 	if (size <= TINY)
-		block = get_block(&g_arena.tiny, size);
+		block = fit_block(&g_arena.tiny, size);
 	else if (size <= SMALL)
-		block = get_block(&g_arena.small, size);
+		block = fit_block(&g_arena.small, size);
 	else
-		block = get_block(&g_arena.large, size);
+		block = fit_block(&g_arena.large, size);
 	if (block)
 		return (get_payload(block));
 	return (NULL);

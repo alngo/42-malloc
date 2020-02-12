@@ -12,7 +12,7 @@
 
 #include "malloc.h"
 
-void		*tiny_small_realloc(void *ptr, t_meta *data, size_t size)
+void		*realloc_tiny_small(void *ptr, t_meta *data, size_t size)
 {
 	void	*block;
 	void	*new_ptr;
@@ -24,11 +24,11 @@ void		*tiny_small_realloc(void *ptr, t_meta *data, size_t size)
 		return (ptr);
 	}
 	if (size <= TINY)
-		block = get_block(&g_arena.tiny, size);
+		block = fit_block(&g_arena.tiny, size);
 	else if (size <= SMALL)
-		block = get_block(&g_arena.small, size);
+		block = fit_block(&g_arena.small, size);
 	else
-		block = get_block(&g_arena.large, size);
+		block = fit_block(&g_arena.large, size);
 	if (block)
 	{
 		new_ptr = get_payload(block);
@@ -38,7 +38,7 @@ void		*tiny_small_realloc(void *ptr, t_meta *data, size_t size)
 	return (new_ptr);
 }
 
-void		*large_realloc(void *ptr, t_meta *data, size_t size)
+void		*realloc_large(void *ptr, t_meta *data, size_t size)
 {
 	void	*new_ptr;
 
@@ -51,7 +51,7 @@ void		*large_realloc(void *ptr, t_meta *data, size_t size)
 	return (new_ptr);
 }
 
-void		*minimum_sized_realloc(void *ptr)
+void		*realloc_minimum_size(void *ptr)
 {
 	free(ptr);
 	return (malloc(0));
@@ -64,12 +64,12 @@ void		*realloc(void *ptr, size_t size)
 
 	if (!ptr)
 		return (malloc(size));
-	if (!(block = get_block_at(ptr, NULL)))
+	if (!(block = get_block(ptr, NULL)))
 		return (NULL);
 	data = get_meta(block);
 	if (data->flags & MMAPD)
-		return (large_realloc(ptr, data, size));
+		return (realloc_large(ptr, data, size));
 	else if (size == 0)
-		return (minimum_sized_realloc(ptr));
-	return (tiny_small_realloc(ptr, data, size));
+		return (realloc_minimum_size(ptr));
+	return (realloc_tiny_small(ptr, data, size));
 }

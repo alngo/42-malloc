@@ -58,8 +58,13 @@ void				show_alloc_mem();
 ** block.c
 */
 
-void				*get_block(void **heap, size_t size);
-void				*get_block_at(void *ptr, t_meta **prec);
+void				*get_block(void *ptr, void **heap);
+
+/*
+** fit.c
+*/
+
+void				*fit_block(void **heap, size_t size);
 
 /*
 ** heap.c
