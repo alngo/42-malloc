@@ -40,9 +40,9 @@ MU_TEST(free_test_valid_pointer)
 	ptr_b = malloc(1000);
 	ptr_c = malloc(5000);
 
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
-	meta_b = get_meta(ptr_b - sizeof(t_meta));
-	meta_c = get_meta(ptr_c - sizeof(t_meta));
+	meta_a = meta(ptr_a - sizeof(t_meta));
+	meta_b = meta(ptr_b - sizeof(t_meta));
+	meta_c = meta(ptr_c - sizeof(t_meta));
 
 	free(ptr_a);
 	free(ptr_b);
@@ -67,9 +67,9 @@ MU_TEST(free_test_multiple_free)
 	ptr_b = malloc(1000);
 	ptr_c = malloc(5000);
 
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
-	meta_b = get_meta(ptr_b - sizeof(t_meta));
-	meta_c = get_meta(ptr_c - sizeof(t_meta));
+	meta_a = meta(ptr_a - sizeof(t_meta));
+	meta_b = meta(ptr_b - sizeof(t_meta));
+	meta_c = meta(ptr_c - sizeof(t_meta));
 
 	free(ptr_a);
 	free(ptr_a);
@@ -96,9 +96,9 @@ MU_TEST(free_test_prec_next_large)
 	ptr_b = malloc(5000);
 	ptr_c = malloc(5000);
 
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
-	meta_b = get_meta(ptr_b - sizeof(t_meta));
-	meta_c = get_meta(ptr_c - sizeof(t_meta));
+	meta_a = meta(ptr_a - sizeof(t_meta));
+	meta_b = meta(ptr_b - sizeof(t_meta));
+	meta_c = meta(ptr_c - sizeof(t_meta));
 
 	mu_check(meta_b->next == meta_c);
 	free(ptr_b);

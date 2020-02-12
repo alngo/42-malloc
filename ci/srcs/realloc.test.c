@@ -36,8 +36,8 @@ MU_TEST(realloc_test_large_to_tiny)
 	ptr_a = malloc(5000);
 	ptr_b = realloc(ptr_a, 42);
 
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
-	meta_b = get_meta(ptr_b - sizeof(t_meta));
+	meta_a = meta(ptr_a - sizeof(t_meta));
+	meta_b = meta(ptr_b - sizeof(t_meta));
 
 	free(ptr_a);
 	free(ptr_b);
@@ -89,8 +89,8 @@ MU_TEST(realloc_test_greater_size)
 	ptr_a = malloc(5);
 	ptr_b = realloc(ptr_a, 42);
 
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
-	meta_b = get_meta(ptr_b - sizeof(t_meta));
+	meta_a = meta(ptr_a - sizeof(t_meta));
+	meta_b = meta(ptr_b - sizeof(t_meta));
 
 	mu_check(ptr_a != ptr_b);
 	mu_check(meta_a->flags == 0x0);
@@ -115,8 +115,8 @@ MU_TEST(realloc_test_slightly_greater_size)
 	ptr_a = malloc(5);
 	ptr_b = realloc(ptr_a, 7);
 
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
-	meta_b = get_meta(ptr_b - sizeof(t_meta));
+	meta_a = meta(ptr_a - sizeof(t_meta));
+	meta_b = meta(ptr_b - sizeof(t_meta));
 
 	mu_check(ptr_a == ptr_b);
 	mu_check(meta_b->size == 7);
@@ -136,8 +136,8 @@ MU_TEST(realloc_test_lower_size)
 	ptr_a = malloc(42);
 	ptr_b = realloc(ptr_a, 10);
 
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
-	meta_b = get_meta(ptr_b - sizeof(t_meta));
+	meta_a = meta(ptr_a - sizeof(t_meta));
+	meta_b = meta(ptr_b - sizeof(t_meta));
 
 	mu_check(ptr_a == ptr_b);
 	mu_check(meta_b->size == 10);

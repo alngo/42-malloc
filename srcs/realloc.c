@@ -28,9 +28,7 @@ void		*realloc_large(void *ptr, t_meta *data, size_t size)
 void		*realloc_tiny_small(void *ptr, t_meta *data, size_t size)
 {
 	void	*block;
-	void	*new_ptr;
 
-	new_ptr = NULL;
 	if (size <= data->size || size < (size_t)(data->next - ptr))
 	{
 		set_meta(data, size, data->flags | INUSE, data->next);
@@ -44,11 +42,10 @@ void		*realloc_tiny_small(void *ptr, t_meta *data, size_t size)
 		block = fit_block(&g_arena.large, size);
 	if (block)
 	{
-		new_ptr = get_payload(block);
-		ft_memcpy(new_ptr, ptr, size);
+		ft_memcpy(payload(block), ptr, size);
 		free(ptr);
 	}
-	return (new_ptr);
+	return (payload(block));
 }
 
 void		*realloc_minimum_size(void *ptr)
@@ -60,16 +57,14 @@ void		*realloc_minimum_size(void *ptr)
 void		*realloc(void *ptr, size_t size)
 {
 	void	*block;
-	t_meta	*data;
 
 	if (!ptr)
 		return (malloc(size));
 	if (!(block = get_block(ptr, NULL)))
 		return (NULL);
-	data = get_meta(block);
-	if (data->flags & MMAPD)
-		return (realloc_large(ptr, data, size));
+	if (meta(block)->flags & MMAPD)
+		return (realloc_large(ptr, meta(block), size));
 	else if (size == 0)
 		return (realloc_minimum_size(ptr));
-	return (realloc_tiny_small(ptr, data, size));
+	return (realloc_tiny_small(ptr, meta(block), size));
 }

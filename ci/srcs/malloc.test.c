@@ -37,9 +37,9 @@ MU_TEST(malloc_test_tiny)
 	ptr_b = malloc(10);
 	ptr_zero = malloc(0);
 
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
-	meta_b = get_meta(ptr_b - sizeof(t_meta));
-	meta_zero = get_meta(ptr_zero - sizeof(t_meta));
+	meta_a = meta(ptr_a - sizeof(t_meta));
+	meta_b = meta(ptr_b - sizeof(t_meta));
+	meta_zero = meta(ptr_zero - sizeof(t_meta));
 
 	mu_check(meta_a->size == 42);
 	mu_check(meta_a->flags == INUSE);
@@ -68,8 +68,8 @@ MU_TEST(malloc_test_large)
 	ptr_a = malloc(5000);
 	ptr_b = malloc(5000);
 
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
-	meta_b = get_meta(ptr_b - sizeof(t_meta));
+	meta_a = meta(ptr_a - sizeof(t_meta));
+	meta_b = meta(ptr_b - sizeof(t_meta));
 
 	mu_check(meta_a->size == 5000);
 	mu_check(meta_a->flags == (INUSE | MMAPD));
@@ -89,7 +89,7 @@ MU_TEST(malloc_test_xlarge)
 	t_meta		*meta_a;
 
 	ptr_a = malloc(INT_MAX);
-	meta_a = get_meta(ptr_a - sizeof(t_meta));
+	meta_a = meta(ptr_a - sizeof(t_meta));
 
 	mu_check(meta_a->size == INT_MAX);
 	mu_check(meta_a->flags == (INUSE | MMAPD));
