@@ -3,7 +3,7 @@
 dir=.
 src=srcs
 out=outs
-lft=lft_malloc
+lft=../libft_malloc.so
 
 mkdir $out
 gcc -o $dir/$out/test0 	$dir/$src/test0.c;
