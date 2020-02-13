@@ -6,11 +6,12 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 09:23:18 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 16:32:48 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/13 14:09:04 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
+#include <stdio.h>
 
 t_meta		*meta(void *ptr)
 {
