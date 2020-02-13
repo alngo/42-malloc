@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:20:19 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 16:32:00 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/13 13:28:40 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void		free(void *ptr)
 {
 	void	*block;
-	void 	*heap;
-	uint8_t is_large;
+	void	*heap;
+	uint8_t	is_large;
 
 	heap = NULL;
 	if (!ptr || !(block = get_block(ptr, &heap)))

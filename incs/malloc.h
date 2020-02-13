@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/11 16:12:35 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/13 13:30:15 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void				*fit_block(void **heap, size_t size);
 */
 
 void				*init_heap(size_t size);
-uint8_t 			is_empty_heap(void *heap);
-void 				delete_heap(void *heap);
+uint8_t				is_empty_heap(void *heap);
+void				delete_heap(void *heap);
 
 /*
 ** utils.c

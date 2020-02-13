@@ -6,16 +6,16 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:17:30 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/13 13:17:39 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/13 13:23:23 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/malloc.h"
 
-int 		main()
+int			main(void)
 {
-	int 	i;
-	char 	*addr;
+	int		i;
+	char	*addr;
 
 	i = 0;
 	while (i < 1024)

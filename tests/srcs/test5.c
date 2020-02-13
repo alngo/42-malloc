@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:41 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/13 13:20:08 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/13 13:27:36 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <string.h>
 
-int 		main()
+int			main(void)
 {
 	char	*adr1;
 	char	*adr2;

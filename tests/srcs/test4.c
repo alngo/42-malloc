@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:11 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/13 13:19:16 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/13 13:26:27 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 #include <unistd.h>
 #include <string.h>
 
-void 		print(char *s)
+void		print(char *s)
 {
 	write(1, s, strlen(s));
 }
 
-int 		main()
+int			main(void)
 {
-	char 	*addr;
-	char 	*addr3;
+	char	*addr;
+	char	*addr3;
 
 	addr = malloc(16);
 	free(NULL);
