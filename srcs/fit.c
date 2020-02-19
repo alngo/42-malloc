@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:28:59 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 11:36:58 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 16:07:53 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void		*fit_block_tiny_small(void *heap, size_t size)
 			if (meta(block)->size == 0 || meta(block)->size >= size)
 			{
 				aligned_size = size_alignment(size, sizeof(void *));
-				next = block + sizeof(t_meta) + aligned_size;
+				next = meta(block)->next ? meta(block)->next :
+					block + sizeof(t_meta) + aligned_size;
 				if (next > (heap + sizeof(t_meta) + meta(heap)->size))
 					next = NULL;
 				set_meta(block, size, INUSE, next);

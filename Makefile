@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/02/19 14:12:00 by alngo            ###   ########.fr        #
+#    Updated: 2020/02/19 15:53:01 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SLNK := libft_malloc.so
 
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror
+DEBUGFLAGS := -DDCALL
 
 SRC_PATH := srcs
 OBJ_PATH := objs
@@ -48,7 +49,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_PATH) $(OBJ)
 	@echo "libft_malloc compilation..."
-	$(CC) $(CFLAGS) -shared -fPIC -o $(NAME) $(OBJ)
+	$(CC) $(CFLAGS) $(DEBUGFLAGS) -shared -fPIC -o $(NAME) $(OBJ)
 	@ln -sf $(NAME) $(SLNK) 2> /dev/null || true
 	@echo "Done"
 
@@ -56,7 +57,7 @@ $(OBJ_PATH):
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	$(CC) $(CFLAGS) -I $(INC_PATH)/ -MMD -MP -c -fPIC $< -o $@
+	$(CC) $(CFLAGS) $(DEBUGFLAGS) -I $(INC_PATH)/ -MMD -MP -c -fPIC $< -o $@
 
 clean:
 	make clean -C ci/

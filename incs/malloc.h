@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 13:48:53 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 16:06:25 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@
 # ifndef HEXMEM
 
 #  define HEXMEM 0
+
+# endif
+
+# ifndef DCALL
+
+#  define DCALL 0
 
 # endif
 
@@ -121,6 +127,9 @@ void				ft_putmem(const void *ptr, size_t n);
 ** debug.c
 */
 
+void				debug_block(void *payload, t_meta *data);
 void				debug_output(const char *name);
+void				debug_call(const char *name, size_t info,
+		unsigned int base);
 
 #endif

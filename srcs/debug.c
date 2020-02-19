@@ -6,31 +6,31 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 13:35:29 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 14:09:58 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 16:06:22 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void				block_info(void *payload, t_meta *data)
+void				debug_block(void *payload, t_meta *data)
 {
 	(void)payload;
 	if (data->size)
 	{
-		ft_putstr("[start: ");
+		ft_putstr("---------------------------------------------\n");
+		ft_putstr("\033[0;32mstart: ");
 		ft_putnbr((size_t)(void *)data, 16);
-		ft_putstr("][next: ");
-		ft_putnbr((size_t)data->next, 16);
-		ft_putstr("][size: ");
+		ft_putstr("\n---------------------------------------------\n");
+		ft_putstr("\033[0;34msize:  ");
 		ft_putnbr(data->size, 10);
-		ft_putstr("][flags: ");
+		ft_putstr("\n\033[0;33mflags: ");
 		ft_putnbr(data->flags, 2);
-		ft_putstr("]\n");
+		ft_putstr("\n\033[0;36mnext:  ");
+		ft_putnbr((size_t)data->next, 16);
+		ft_putstr("\033[0m\n");
 		if (HEXMEM)
 		{
-			ft_putstr("payload:\n");
 			ft_putmem(payload, HEXMEM == 1 ? data->size : HEXMEM);
-			ft_putstr("\n");
 		}
 	}
 }
@@ -47,19 +47,31 @@ void				debug_output(const char *name)
 	heaps[0] = g_arena.tiny;
 	heaps[1] = g_arena.small;
 	heaps[2] = g_arena.large;
-	names[0] = "TINY";
-	names[1] = "SMALL";
-	names[2] = "LARGE";
-	ft_putstr("DEBUG: ");
+	names[0] = "\033[0;31mTINY\033[0m";
+	names[1] = "\033[0;31mSMALL\033[0m";
+	names[2] = "\033[0;31mLARGE\033[0m";
+	ft_putstr(">>> DEBUG: ");
 	ft_putstr(name);
 	ft_putstr(":\n====================================\n");
 	while (index < 3)
 	{
-		print_allocation(names[index], heaps[index], &acc, &block_info);
+		print_allocation(names[index], heaps[index], &acc, &debug_block);
 		index++;
 	}
 	ft_putstr("Total : ");
 	ft_putnbr(acc, 10);
 	ft_putstr(" octets\n");
 	ft_putstr(":\n====================================\n");
+}
+
+void				debug_call(const char *name, size_t info,
+		unsigned int base)
+{
+	ft_putstr("CALL: ");
+	ft_putstr(name);
+	ft_putstr(" -- ");
+	ft_putnbr(info, base);
+	if (base == 10)
+		ft_putstr(" octets");
+	ft_putstr("\n");
 }
