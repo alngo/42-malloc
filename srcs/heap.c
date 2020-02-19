@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 12:33:28 by alngo             #+#    #+#             */
-/*   Updated: 2020/01/28 14:56:20 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 13:47:05 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,10 @@ void		*init_heap(size_t size)
 	return (ptr);
 }
 
-void 		*get_heap_surrounding(void *start, void *heap,
+void		*get_heap_surrounding(void *start, void *heap,
 		void **prec, void **next)
 {
-	void 	*page;
-
+	void	*page;
 	page = start;
 	*prec = NULL;
 	while (page)
@@ -53,9 +52,9 @@ void 		*get_heap_surrounding(void *start, void *heap,
 	return (NULL);
 }
 
-uint8_t 	is_empty_heap(void *payload)
+uint8_t		is_empty_heap(void *payload)
 {
-	void 	*block;
+	void	*block;
 
 	block = payload;
 	while (block)
@@ -69,11 +68,11 @@ uint8_t 	is_empty_heap(void *payload)
 	return (1);
 }
 
-void 		delete_heap(void *heap)
+void		delete_heap(void *heap)
 {
-	void 	*prec;
-	void 	*next;
-	void 	*target;
+	void	*prec;
+	void	*next;
+	void	*target;
 
 	prec = NULL;
 	next = NULL;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fit.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/13 13:28:59 by alngo             #+#    #+#             */
+/*   Updated: 2020/02/19 16:07:53 by alngo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "malloc.h"
 
 void		*fit_block_large(void *heap, size_t size)
@@ -23,7 +35,8 @@ void		*fit_block_tiny_small(void *heap, size_t size)
 			if (meta(block)->size == 0 || meta(block)->size >= size)
 			{
 				aligned_size = size_alignment(size, sizeof(void *));
-				next = block + sizeof(t_meta) + aligned_size;
+				next = meta(block)->next ? meta(block)->next :
+					block + sizeof(t_meta) + aligned_size;
 				if (next > (heap + sizeof(t_meta) + meta(heap)->size))
 					next = NULL;
 				set_meta(block, size, INUSE, next);
@@ -41,10 +54,10 @@ void		*fit_block(void **heap, size_t size)
 
 	if (!*heap && !(*heap = init_heap(size)))
 		return (NULL);
-	if (size > SMALL)
-		block = fit_block_large(*heap, size);
-	else
+	if (size <= SMALL)
 		block = fit_block_tiny_small(*heap, size);
+	else
+		block = fit_block_large(*heap, size);
 	if (block)
 		return (block);
 	return (fit_block(&(meta(*heap))->next, size));

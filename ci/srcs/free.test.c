@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 15:55:07 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 18:13:27 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 13:02:43 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ MU_TEST(free_test_valid_pointer)
 	t_meta	*meta_b;
 	t_meta	*meta_c;
 
-	ptr_a = malloc(42);
-	ptr_b = malloc(1024);
-	ptr_c = malloc(5000);
+	ptr_a = malloc(1024);
+	ptr_b = malloc(4096);
+	ptr_c = malloc(16 * 1024);
 
 	meta_a = meta(ptr_a - sizeof(t_meta));
 	meta_b = meta(ptr_b - sizeof(t_meta));
@@ -69,8 +69,8 @@ MU_TEST(free_test_multiple_free)
 	t_meta	*meta_b;
 	t_meta	*meta_c;
 
-	ptr_a = malloc(42);
-	ptr_b = malloc(1024);
+	ptr_a = malloc(1024);
+	ptr_b = malloc(4096);
 	ptr_c = malloc(5000);
 
 	meta_a = meta(ptr_a - sizeof(t_meta));

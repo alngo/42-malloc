@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 09:23:18 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 16:32:48 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 13:13:08 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,4 @@ t_meta		*set_meta(void *ptr, size_t size, uint8_t flags, void *next)
 size_t		size_alignment(size_t size, size_t alignment)
 {
 	return ((size + (alignment - 1)) & ~(alignment - 1));
-}
-
-void		*ft_memcpy(void *s1, const void *s2, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		((unsigned char *)s1)[i] = ((unsigned char *)s2)[i];
-		i++;
-	}
-	return (s1);
 }

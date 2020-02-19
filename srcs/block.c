@@ -6,15 +6,15 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:03:38 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 18:06:42 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 12:05:04 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void 		*get_block_large(void *ptr, void *start, void **heap)
+void		*get_block_large(void *ptr, void *start, void **heap)
 {
-	void 	*page;
+	void	*page;
 
 	page = start;
 	while (page)
@@ -30,10 +30,10 @@ void 		*get_block_large(void *ptr, void *start, void **heap)
 	return (NULL);
 }
 
-void 		*get_block_tiny_small(void *ptr, void *start, void **heap)
+void		*get_block_tiny_small(void *ptr, void *start, void **heap)
 {
-	void 	*block;
-	void 	*page;
+	void	*block;
+	void	*page;
 
 	page = start;
 	block = payload(page);
