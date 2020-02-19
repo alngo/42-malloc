@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/02/19 11:39:23 by alngo            ###   ########.fr        #
+#    Updated: 2020/02/19 12:07:34 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME := libft_malloc_$(HOSTTYPE).so
 SLNK := libft_malloc.so
 
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -DDEBUG
+CFLAGS := -Wall -Wextra -Werror
 
 SRC_PATH := srcs
 OBJ_PATH := objs

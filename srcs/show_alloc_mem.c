@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:22:43 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 10:22:53 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 12:06:06 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			show_block(void *payload, t_meta *data)
 	}
 }
 
-void 			show_block_info(void *payload, t_meta *data)
+void			show_block_info(void *payload, t_meta *data)
 {
 	(void)payload;
 	if (data->size)

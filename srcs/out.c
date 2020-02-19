@@ -6,16 +6,16 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 15:51:55 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 10:11:16 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 12:06:53 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void			ft_putstr(const char *str)
+void				ft_putstr(const char *str)
 {
-	size_t		len;
-	const char	*us;
+	size_t			len;
+	const char		*us;
 
 	us = str;
 	while (*us)
@@ -24,11 +24,11 @@ void			ft_putstr(const char *str)
 	write(1, str, len);
 }
 
-void			ft_nbr_out(size_t value, size_t len, unsigned int base)
+void				ft_nbr_out(size_t value, size_t len, unsigned int base)
 {
-	size_t		i;
-	char		str[len];
-	char		*cipher;
+	size_t			i;
+	char			str[len];
+	char			*cipher;
 
 	i = value;
 	cipher = "0123456789ABCDEF";
@@ -44,10 +44,10 @@ void			ft_nbr_out(size_t value, size_t len, unsigned int base)
 	ft_putstr(str);
 }
 
-char			*ft_putnbr(size_t value, unsigned int base)
+char				*ft_putnbr(size_t value, unsigned int base)
 {
-	size_t		i;
-	size_t		len;
+	size_t			i;
+	size_t			len;
 
 	i = value;
 	len = base == 16 ? 3 : 1;
@@ -57,9 +57,9 @@ char			*ft_putnbr(size_t value, unsigned int base)
 	return (NULL);
 }
 
-static void				print_memory_pad(size_t i, char *buf)
+static void			print_memory_pad(size_t i, char *buf)
 {
-	size_t				pad;
+	size_t			pad;
 
 	pad = i % 16;
 	while (i % 16)
@@ -74,12 +74,12 @@ static void				print_memory_pad(size_t i, char *buf)
 		write(1, "\n", 1);
 }
 
-void					ft_putmem(const void *ptr, size_t n)
+void				ft_putmem(const void *ptr, size_t n)
 {
-	unsigned char		*tmp;
-	char				*hex;
-	char				buf[17];
-	size_t				i;
+	unsigned char	*tmp;
+	char			*hex;
+	char			buf[17];
+	size_t			i;
 
 	hex = "0123456789abcdef";
 	ft_memcpy((void *)buf, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\n", 17);
