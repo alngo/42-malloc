@@ -6,13 +6,13 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:22:43 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 12:06:06 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 13:44:56 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void			show_block(void *payload, t_meta *data)
+void			print_block(void *payload, t_meta *data)
 {
 	if (data->flags & INUSE)
 	{
@@ -25,32 +25,8 @@ void			show_block(void *payload, t_meta *data)
 	}
 }
 
-void			show_block_info(void *payload, t_meta *data)
-{
-	(void)payload;
-	if (data->size)
-	{
-		ft_putstr("start: ");
-		ft_putnbr((size_t)(void *)data, 16);
-		ft_putstr(" | size: ");
-		ft_putnbr(data->size, 10);
-		ft_putstr(" | flags: ");
-		ft_putnbr(data->flags, 2);
-		ft_putstr(" | next: ");
-		ft_putnbr((size_t)data->next, 16);
-		ft_putstr("\n");
-	}
-}
-
-void			print_block(void *payload, t_meta *data)
-{
-	if (DEBUG)
-		show_block_info(payload, data);
-	else
-		show_block(payload, data);
-}
-
-void			print_allocation(const char *name, void *heap, size_t *acc)
+void			print_allocation(const char *name, void *heap, size_t *acc,
+		void (*out)(void *, t_meta *))
 {
 	void		*block;
 
@@ -63,12 +39,13 @@ void			print_allocation(const char *name, void *heap, size_t *acc)
 	block = (meta(heap)->flags & INUSE) ? heap : payload(heap);
 	while (block)
 	{
-		print_block(payload(block), meta(block));
-		*acc += meta(block)->size;
+		out(payload(block), meta(block));
+		if (meta(block)->flags & INUSE)
+			*acc += meta(block)->size;
 		block = meta(block)->next;
 	}
 	if (meta(heap)->next && meta(heap)->flags != (INUSE | MMAPD))
-		print_allocation(name, meta(heap)->next, acc);
+		print_allocation(name, meta(heap)->next, acc, out);
 }
 
 void			show_alloc_mem(void)
@@ -88,7 +65,7 @@ void			show_alloc_mem(void)
 	names[2] = "LARGE";
 	while (index < 3)
 	{
-		print_allocation(names[index], heaps[index], &acc);
+		print_allocation(names[index], heaps[index], &acc, &print_block);
 		index++;
 	}
 	ft_putstr("Total : ");

@@ -1,39 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   mem.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/28 09:23:18 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 13:13:08 by alngo            ###   ########.fr       */
+/*   Created: 2020/02/19 13:13:10 by alngo             #+#    #+#             */
+/*   Updated: 2020/02/19 13:50:03 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_meta		*meta(void *ptr)
+void			*ft_memcpy(void *s1, const void *s2, size_t n)
 {
-	return ((t_meta *)ptr);
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)s1)[i] = ((unsigned char *)s2)[i];
+		i++;
+	}
+	return (s1);
 }
 
-void		*payload(void *ptr)
+void			*ft_memset(void *dst, int c, size_t n)
 {
-	return (ptr + sizeof(t_meta));
+	size_t		i;
+
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)dst)[i] = (unsigned char)c;
+		i++;
+	}
+	return (dst);
 }
 
-t_meta		*set_meta(void *ptr, size_t size, uint8_t flags, void *next)
+void			ft_bzero(void *dst, size_t n)
 {
-	t_meta	*meta;
-
-	meta = (t_meta *)ptr;
-	meta->size = size;
-	meta->flags = flags;
-	meta->next = next;
-	return (meta);
-}
-
-size_t		size_alignment(size_t size, size_t alignment)
-{
-	return ((size + (alignment - 1)) & ~(alignment - 1));
+	ft_memset(dst, '\0', n);
 }

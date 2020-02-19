@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 12:13:55 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 13:48:53 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # ifndef DEBUG
 
 #  define DEBUG 0
+
+# endif
+
+# ifndef HEXMEM
+
+#  define HEXMEM 0
 
 # endif
 
@@ -58,8 +64,14 @@ extern t_arena		g_arena;
 void				*malloc(size_t size);
 void				*realloc(void *ptr, size_t size);
 void				free(void *ptr);
+
+/*
+** show_alloc_mem.c
+*/
+
 void				show_alloc_mem();
-void				show_block_info();
+void				print_allocation(const char *name, void *heap, size_t *acc,
+		void(*f)(void *, t_meta *));
 
 /*
 ** block.c
@@ -90,7 +102,12 @@ t_meta				*meta(void *ptr);
 t_meta				*set_meta(void *ptr, size_t size,
 					unsigned char flags, void *next);
 size_t				size_alignment(size_t size, size_t alignment);
+
+/*
+** mem.c
+*/
 void				*ft_memcpy(void *s1, const void *s2, size_t n);
+void				ft_bzero(void *dst, size_t n);
 
 /*
 ** out.c
@@ -99,5 +116,11 @@ void				*ft_memcpy(void *s1, const void *s2, size_t n);
 void				ft_putstr(const char *str);
 char				*ft_putnbr(size_t value, unsigned int base);
 void				ft_putmem(const void *ptr, size_t n);
+
+/*
+** debug.c
+*/
+
+void				debug_output(const char *name);
 
 #endif

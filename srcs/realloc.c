@@ -6,30 +6,29 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:21:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 11:22:32 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 13:37:11 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-#include <stdio.h>
 
-void		debug_realloc(void *block, const char *name)
+void		*realloc_minimum_size(void *ptr)
 {
-	ft_putstr(name);
-	show_block_info(payload(block), meta(block));
+	free(ptr);
+	return (malloc(0));
 }
 
 void		*realloc_large(void *ptr, t_meta *data, size_t size)
 {
-	void	*new_ptr;
+	void	*block;
 
 	if (size == data->size)
 		return (ptr);
-	if (!(new_ptr = malloc(size)))
+	if (!(block = malloc(size)))
 		return (NULL);
-	ft_memcpy(new_ptr, ptr, size);
+	ft_memcpy(block, ptr, size);
 	free(ptr);
-	return (new_ptr - sizeof(t_meta));
+	return (block - sizeof(t_meta));
 }
 
 void		*realloc_tiny_small(void *ptr, t_meta *data, size_t size)
@@ -41,24 +40,13 @@ void		*realloc_tiny_small(void *ptr, t_meta *data, size_t size)
 		set_meta(data, size, data->flags | INUSE, data->next);
 		return (ptr - sizeof(t_meta));
 	}
-	if (size <= TINY)
-		block = fit_block(&g_arena.tiny, size);
-	else if (size <= SMALL)
-		block = fit_block(&g_arena.small, size);
-	else
-		block = fit_block(&g_arena.large, size);
+	block = malloc(size);
 	if (block)
 	{
 		ft_memcpy(payload(block), ptr, size);
 		free(ptr);
 	}
 	return (block);
-}
-
-void		*realloc_minimum_size(void *ptr)
-{
-	free(ptr);
-	return (malloc(0));
 }
 
 void		*realloc(void *ptr, size_t size)
@@ -70,15 +58,13 @@ void		*realloc(void *ptr, size_t size)
 		return (malloc(size));
 	if (!(block = get_block(ptr, NULL)))
 		return (NULL);
-	if (DEBUG)
-		debug_realloc(block, "old block: ");
-	if (meta(block)->flags & MMAPD)
-		new_block = realloc_large(ptr, meta(block), size);
-	else if (size == 0)
+	if (size == 0)
 		new_block = realloc_minimum_size(ptr);
+	else if (meta(block)->flags & MMAPD)
+		new_block = realloc_large(ptr, meta(block), size);
 	else
 		new_block = realloc_tiny_small(ptr, meta(block), size);
 	if (DEBUG)
-		debug_realloc(new_block, "new block: ");
+		debug_output("realloc");
 	return (payload(new_block));
 }
