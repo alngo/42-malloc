@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 12:03:54 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/10 16:36:13 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 12:54:16 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,27 @@ MU_TEST(realloc_test_large_to_tiny)
 	meta_b = meta(ptr_b - sizeof(t_meta));
 
 	free(ptr_a);
+	free(ptr_b);
+}
+
+MU_TEST(realloc_test_large_and_free)
+{
+	char	*ptr_a;
+	char	*ptr_b;
+	char	*ptr_c;
+	char	str[5000];
+
+	rand_string(str, 5000);
+	ptr_a = (char *)malloc(5000);
+	ptr_c = (char *)malloc(5000);
+	for (int i = 0; i < 5000; i++)
+		ptr_a[i] = str[i];
+	ptr_b = (char *)realloc(ptr_a, 42);
+	for (int i = 0; i < 42; i++)
+		mu_check(ptr_b[i] == str[i]);
+	mu_check(ptr_b != ptr_a);
+	free(ptr_a);
+	free(ptr_c);
 	free(ptr_b);
 }
 

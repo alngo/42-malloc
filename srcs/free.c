@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:20:19 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 11:57:36 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 12:56:03 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		free(void *ptr)
 	if (is_empty_heap(is_large ? heap : payload(heap)))
 	{
 		if (DEBUG)
-			debug_free(block, "del free:  ");
+			debug_free(heap, "del free:  ");
 		delete_heap(heap);
 	}
 }
