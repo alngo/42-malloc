@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 15:51:55 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/11 16:12:44 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 09:33:26 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@ void			ft_putstr(const char *str)
 		us++;
 	len = us - str;
 	write(1, str, len);
-}
-
-void			ft_put2str(const char *str1, const char *str2)
-{
-	if (str1)
-		ft_putstr(str1);
-	if (str2)
-		ft_putstr(str2);
 }
 
 void			ft_nbr_out(size_t value, size_t len, unsigned int base)

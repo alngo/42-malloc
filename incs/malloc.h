@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 09:23:55 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 09:33:32 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void				*ft_memcpy(void *s1, const void *s2, size_t n);
 */
 
 void				ft_putstr(const char *str);
-void				ft_put2str(const char *str1, const char *str2);
 char				*ft_putnbr(size_t value, unsigned int base);
 
 #endif
