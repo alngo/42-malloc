@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:21:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 13:37:11 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 14:16:31 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,12 @@ void		*realloc_tiny_small(void *ptr, t_meta *data, size_t size)
 		set_meta(data, size, data->flags | INUSE, data->next);
 		return (ptr - sizeof(t_meta));
 	}
-	block = malloc(size);
-	if (block)
+	if ((block = malloc(size)))
 	{
-		ft_memcpy(payload(block), ptr, size);
+		ft_memcpy(block, ptr, size);
 		free(ptr);
 	}
-	return (block);
+	return (block - sizeof(t_meta));
 }
 
 void		*realloc(void *ptr, size_t size)
