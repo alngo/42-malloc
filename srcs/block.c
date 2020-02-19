@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:03:38 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 11:24:15 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 11:38:05 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void		*get_block_tiny_small(void *ptr, void *start, void **heap)
 					*heap = page;
 				return (block);
 			}
-			ft_putmem(block, 16);
 			block = meta(block)->next;
 		}
 		page = meta(page)->next;

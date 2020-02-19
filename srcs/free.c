@@ -6,15 +6,15 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:20:19 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 10:52:14 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 11:57:36 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void		debug_free(void *block)
+void		debug_free(void *block, const char *name)
 {
-	ft_putstr("free:      ");
+	ft_putstr(name);
 	show_block_info(payload(block), meta(block));
 }
 
@@ -29,11 +29,15 @@ void		free(void *ptr)
 		return ;
 	is_large = meta(block)->flags == (INUSE | MMAPD);
 	if (DEBUG)
-		debug_free(block);
+		debug_free(block, "bef free:  ");
 	set_meta(meta(block), meta(block)->size,
 			meta(block)->flags ^ INUSE, meta(block)->next);
+	if (DEBUG)
+		debug_free(block, "aft free:  ");
 	if (is_empty_heap(is_large ? heap : payload(heap)))
 	{
+		if (DEBUG)
+			debug_free(block, "del free:  ");
 		delete_heap(heap);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:28:59 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 11:05:34 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 11:36:58 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ void		*fit_block(void **heap, size_t size)
 
 	if (!*heap && !(*heap = init_heap(size)))
 		return (NULL);
-	if (size > SMALL)
-		block = fit_block_large(*heap, size);
-	else
+	if (size <= SMALL)
 		block = fit_block_tiny_small(*heap, size);
+	else
+		block = fit_block_large(*heap, size);
 	if (block)
 		return (block);
 	return (fit_block(&(meta(*heap))->next, size));
