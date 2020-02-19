@@ -85,6 +85,7 @@ run_test5()
 	echo "./run.sh /usr/bin/time -l $out/test5"
 	echo "==================================="
 	export DYLD_LIBRARY_PATH=../
+	./$out/test5
 }
 
 run_all()
