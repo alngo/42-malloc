@@ -6,12 +6,11 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:21:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/13 14:00:21 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 09:27:26 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-#include <stdio.h>
 
 void		*realloc_large(void *ptr, t_meta *data, size_t size)
 {
@@ -21,11 +20,8 @@ void		*realloc_large(void *ptr, t_meta *data, size_t size)
 		return (ptr);
 	if (!(new_ptr = malloc(size)))
 		return (NULL);
-	printf("DEBUG: [[%p]] -> [[%p]]\n", ptr, new_ptr);
 	ft_memcpy(new_ptr, ptr, size);
-	printf("DEBUG: ((%p)) -> ((%p))\n", g_arena.large, meta(g_arena.large)->next);
 	free(ptr);
-	printf("DEBUG: {{%p}} -> {{%p}}\n", g_arena.large, meta(g_arena.large)->next);
 	return (new_ptr);
 }
 
