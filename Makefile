@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/02/19 15:53:01 by alngo            ###   ########.fr        #
+#    Updated: 2020/02/19 16:11:30 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SLNK := libft_malloc.so
 
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror
-DEBUGFLAGS := -DDCALL
+DEBUGFLAGS :=
 
 SRC_PATH := srcs
 OBJ_PATH := objs
