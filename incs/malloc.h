@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 11:59:14 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 12:00:14 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum		e_malloc_flags
 
 typedef enum		e_malloc_type
 {
-	TINY = 128,
+	TINY = 1024,
 	SMALL = 4096,
 	LARGE = 4097
 }					t_malloc_type;
