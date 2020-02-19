@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:20:19 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 16:06:15 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:19:57 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void		free(void *ptr)
 	void	*heap;
 	uint8_t	is_large;
 
+	pthread_mutex_lock(&g_lock);
 	if (DCALL)
 		debug_call("free", (size_t)ptr, 16);
 	heap = NULL;
@@ -30,4 +31,5 @@ void		free(void *ptr)
 		delete_heap(heap);
 	if (DEBUG)
 		debug_output("free");
+	pthread_mutex_unlock(&g_lock);
 }

@@ -6,18 +6,20 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:18:41 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 16:06:02 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:28:05 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_arena		g_arena = {NULL, NULL, NULL};
+t_arena			g_arena = {NULL, NULL, NULL};
+pthread_mutex_t g_lock = NULL;
 
-void		*malloc(size_t size)
+void			*malloc(size_t size)
 {
-	void	*block;
+	void		*block;
 
+	pthread_mutex_lock(&g_lock);
 	if (DCALL)
 		debug_call("malloc", size, 10);
 	if (size > (~(size_t)0 >> 3))
@@ -30,6 +32,7 @@ void		*malloc(size_t size)
 		block = fit_block(&g_arena.large, size);
 	if (DEBUG)
 		debug_output("malloc");
+	pthread_mutex_unlock(&g_lock);
 	if (block)
 		return (payload(block));
 	return (NULL);

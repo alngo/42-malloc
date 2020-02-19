@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 12:33:28 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 13:47:05 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:17:39 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void		*get_heap_surrounding(void *start, void *heap,
 		void **prec, void **next)
 {
 	void	*page;
+
 	page = start;
 	*prec = NULL;
 	while (page)

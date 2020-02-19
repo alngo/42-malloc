@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:21:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 16:11:17 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 17:20:18 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void		*realloc(void *ptr, size_t size)
 	void	*block;
 	void	*new_block;
 
+	pthread_mutex_lock(&g_lock);
 	if (DCALL)
 		debug_call("realloc", (size_t)ptr, 16);
 	if (!ptr)
@@ -70,6 +71,7 @@ void		*realloc(void *ptr, size_t size)
 		new_block = realloc_tiny_small(ptr, meta(block), size);
 	if (DEBUG)
 		debug_output("realloc");
+	pthread_mutex_unlock(&g_lock);
 	if (block)
 		return (payload(new_block));
 	else
