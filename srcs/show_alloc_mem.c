@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:22:43 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 09:38:02 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 16:12:53 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 void			print_block(void *payload, t_meta *data)
 {
-	ft_putnbr((size_t)payload, 16);
-	ft_putstr(" - ");
-	ft_putnbr((size_t)payload + data->size, 16);
-	ft_putstr(" : ");
-	ft_putnbr(data->size, 10);
-	ft_putstr(" octets\n");
+	if (data->flags & INUSE)
+	{
+		ft_putnbr((size_t)payload, 16);
+		ft_putstr(" - ");
+		ft_putnbr((size_t)payload + data->size, 16);
+		ft_putstr(" : ");
+		ft_putnbr(data->size, 10);
+		ft_putstr(" octets\n");
+	}
 }
 
-void			print_allocation(const char *name, void *heap, size_t *acc)
+void			print_allocation(const char *name, void *heap, size_t *acc,
+		void (*out)(void *, t_meta *))
 {
 	void		*block;
 
@@ -35,15 +39,13 @@ void			print_allocation(const char *name, void *heap, size_t *acc)
 	block = (meta(heap)->flags & INUSE) ? heap : payload(heap);
 	while (block)
 	{
+		out(payload(block), meta(block));
 		if (meta(block)->flags & INUSE)
-		{
-			print_block(payload(block), meta(block));
 			*acc += meta(block)->size;
-		}
 		block = meta(block)->next;
 	}
 	if (meta(heap)->next && meta(heap)->flags != (INUSE | MMAPD))
-		print_allocation(name, meta(heap)->next, acc);
+		print_allocation(name, meta(heap)->next, acc, out);
 }
 
 void			show_alloc_mem(void)
@@ -63,7 +65,7 @@ void			show_alloc_mem(void)
 	names[2] = "LARGE";
 	while (index < 3)
 	{
-		print_allocation(names[index], heaps[index], &acc);
+		print_allocation(names[index], heaps[index], &acc, &print_block);
 		index++;
 	}
 	ft_putstr("Total : ");

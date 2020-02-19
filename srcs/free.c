@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:20:19 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 09:27:26 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 16:06:15 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void		free(void *ptr)
 	void	*heap;
 	uint8_t	is_large;
 
+	if (DCALL)
+		debug_call("free", (size_t)ptr, 16);
 	heap = NULL;
 	if (!ptr || !(block = get_block(ptr, &heap)))
 		return ;
@@ -25,7 +27,7 @@ void		free(void *ptr)
 	set_meta(meta(block), meta(block)->size,
 			meta(block)->flags ^ INUSE, meta(block)->next);
 	if (is_empty_heap(is_large ? heap : payload(heap)))
-	{
 		delete_heap(heap);
-	}
+	if (DEBUG)
+		debug_output("free");
 }

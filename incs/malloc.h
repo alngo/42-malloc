@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 09:33:32 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 16:06:25 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,24 @@
 # include <unistd.h>
 # include <sys/mman.h>
 
+# ifndef DEBUG
+
+#  define DEBUG 0
+
+# endif
+
+# ifndef HEXMEM
+
+#  define HEXMEM 0
+
+# endif
+
+# ifndef DCALL
+
+#  define DCALL 0
+
+# endif
+
 typedef enum		e_malloc_flags
 {
 	INUSE = 0x4,
@@ -28,7 +46,7 @@ typedef enum		e_malloc_flags
 
 typedef enum		e_malloc_type
 {
-	TINY = 128,
+	TINY = 1024,
 	SMALL = 4096,
 	LARGE = 4097
 }					t_malloc_type;
@@ -52,7 +70,14 @@ extern t_arena		g_arena;
 void				*malloc(size_t size);
 void				*realloc(void *ptr, size_t size);
 void				free(void *ptr);
+
+/*
+** show_alloc_mem.c
+*/
+
 void				show_alloc_mem();
+void				print_allocation(const char *name, void *heap, size_t *acc,
+		void(*f)(void *, t_meta *));
 
 /*
 ** block.c
@@ -83,7 +108,12 @@ t_meta				*meta(void *ptr);
 t_meta				*set_meta(void *ptr, size_t size,
 					unsigned char flags, void *next);
 size_t				size_alignment(size_t size, size_t alignment);
+
+/*
+** mem.c
+*/
 void				*ft_memcpy(void *s1, const void *s2, size_t n);
+void				ft_bzero(void *dst, size_t n);
 
 /*
 ** out.c
@@ -91,5 +121,15 @@ void				*ft_memcpy(void *s1, const void *s2, size_t n);
 
 void				ft_putstr(const char *str);
 char				*ft_putnbr(size_t value, unsigned int base);
+void				ft_putmem(const void *ptr, size_t n);
+
+/*
+** debug.c
+*/
+
+void				debug_block(void *payload, t_meta *data);
+void				debug_output(const char *name);
+void				debug_call(const char *name, size_t info,
+		unsigned int base);
 
 #endif
