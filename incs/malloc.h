@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/13 13:30:15 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 09:23:55 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 # include <unistd.h>
 # include <sys/mman.h>
 
-typedef enum		e_malloc_mask
+typedef enum		e_malloc_flags
 {
 	INUSE = 0x4,
 	MMAPD = 0x2,
 	PREVINUSE = 0x1
-}					t_malloc_mask;
+}					t_malloc_flags;
 
 typedef enum		e_malloc_type
 {
