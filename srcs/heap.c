@@ -39,7 +39,6 @@ void		*get_heap_surrounding(void *start, void *heap,
 		void **prec, void **next)
 {
 	void	*page;
-
 	page = start;
 	*prec = NULL;
 	while (page)
