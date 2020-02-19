@@ -6,20 +6,48 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:22:43 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 09:38:02 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 10:22:53 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
+void			show_block(void *payload, t_meta *data)
+{
+	if (data->flags & INUSE)
+	{
+		ft_putnbr((size_t)payload, 16);
+		ft_putstr(" - ");
+		ft_putnbr((size_t)payload + data->size, 16);
+		ft_putstr(" : ");
+		ft_putnbr(data->size, 10);
+		ft_putstr(" octets\n");
+	}
+}
+
+void 			show_block_info(void *payload, t_meta *data)
+{
+	(void)payload;
+	if (data->size)
+	{
+		ft_putstr("start: ");
+		ft_putnbr((size_t)(void *)data, 16);
+		ft_putstr(" | size: ");
+		ft_putnbr(data->size, 10);
+		ft_putstr(" | flags: ");
+		ft_putnbr(data->flags, 2);
+		ft_putstr(" | next: ");
+		ft_putnbr((size_t)data->next, 16);
+		ft_putstr("\n");
+	}
+}
+
 void			print_block(void *payload, t_meta *data)
 {
-	ft_putnbr((size_t)payload, 16);
-	ft_putstr(" - ");
-	ft_putnbr((size_t)payload + data->size, 16);
-	ft_putstr(" : ");
-	ft_putnbr(data->size, 10);
-	ft_putstr(" octets\n");
+	if (DEBUG)
+		show_block_info(payload, data);
+	else
+		show_block(payload, data);
 }
 
 void			print_allocation(const char *name, void *heap, size_t *acc)
@@ -35,11 +63,8 @@ void			print_allocation(const char *name, void *heap, size_t *acc)
 	block = (meta(heap)->flags & INUSE) ? heap : payload(heap);
 	while (block)
 	{
-		if (meta(block)->flags & INUSE)
-		{
-			print_block(payload(block), meta(block));
-			*acc += meta(block)->size;
-		}
+		print_block(payload(block), meta(block));
+		*acc += meta(block)->size;
 		block = meta(block)->next;
 	}
 	if (meta(heap)->next && meta(heap)->flags != (INUSE | MMAPD))

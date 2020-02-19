@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 09:33:32 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/19 11:18:04 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include <stdint.h>
 # include <unistd.h>
 # include <sys/mman.h>
+
+# ifndef DEBUG
+
+#  define DEBUG 0
+
+# endif
 
 typedef enum		e_malloc_flags
 {
@@ -53,6 +59,7 @@ void				*malloc(size_t size);
 void				*realloc(void *ptr, size_t size);
 void				free(void *ptr);
 void				show_alloc_mem();
+void				show_block_info();
 
 /*
 ** block.c
@@ -91,5 +98,6 @@ void				*ft_memcpy(void *s1, const void *s2, size_t n);
 
 void				ft_putstr(const char *str);
 char				*ft_putnbr(size_t value, unsigned int base);
+void				ft_putmem(const void *ptr, size_t n);
 
 #endif

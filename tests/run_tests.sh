@@ -6,13 +6,13 @@ out=outs
 lft=../libft_malloc.so
 
 mkdir $out
-gcc -g -o $dir/$out/test0 	$dir/$src/test0.c;
-gcc -g -o $dir/$out/test1 	$dir/$src/test1.c;
-gcc -g -o $dir/$out/test2 	$dir/$src/test2.c;
-gcc -g -o $dir/$out/test3 	$dir/$src/test3.c;
-gcc -g -o $dir/$out/test3b $dir/$src/test3b.c;
-gcc -g -o $dir/$out/test4 	$dir/$src/test4.c;
-gcc -g -o $dir/$out/test5 	$dir/$src/test5.c -I ../incs/ -L../ -lft_malloc;
+gcc -o $dir/$out/test0 	$dir/$src/test0.c;
+gcc -o $dir/$out/test1 	$dir/$src/test1.c;
+gcc -o $dir/$out/test2 	$dir/$src/test2.c;
+gcc -o $dir/$out/test3 	$dir/$src/test3.c;
+gcc -o $dir/$out/test3b $dir/$src/test3b.c;
+gcc -o $dir/$out/test4 	$dir/$src/test4.c;
+gcc -o $dir/$out/test5 	$dir/$src/test5.c -I ../incs/ -L../ -lft_malloc;
 
 echo "==================================="
 echo "nm $lft"
