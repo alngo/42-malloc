@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 12:33:28 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 11:22:21 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 11:59:24 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		*init_heap(size_t size)
 	ptr = NULL;
 	pagesize = getpagesize();
 	offset = sizeof(t_meta);
-	if (DCALLTRACE == 2)
+	if (DCALLTRACE >= 2)
 		debug_process("init_heap", 2);
 	if (size < TINY)
 		heap_size = size_alignment(offset + ((TINY + offset) * 100), pagesize);
