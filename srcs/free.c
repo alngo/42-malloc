@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:20:19 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 09:16:27 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 10:40:18 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void		free(void *ptr)
 	uint8_t	is_large;
 
 	lock();
-	if (DCALL)
-		debug_call("free", (size_t)ptr, 16);
+	if (DCALLTRACE)
+		debug_call("free   ", 0, ptr);
 	heap = NULL;
 	if (!ptr || !(block = get_block(ptr, &heap)))
 		return ;

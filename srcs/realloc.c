@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:21:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 09:23:51 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 10:37:49 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void		*realloc(void *ptr, size_t size)
 	void	*new_block;
 
 	lock();
-	if (DCALL)
-		debug_call("realloc", (size_t)ptr, 16);
+	if (DCALLTRACE)
+		debug_call("realloc", size, ptr);
 	if (!ptr)
 		return (malloc(size));
 	if (!(block = get_block(ptr, NULL)))

@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 13:35:29 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 16:06:22 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 10:41:19 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,20 @@ void				debug_output(const char *name)
 	ft_putstr(":\n====================================\n");
 }
 
-void				debug_call(const char *name, size_t info,
-		unsigned int base)
+void				debug_call(const char *name, size_t size,
+		void *ptr)
 {
 	ft_putstr("CALL: ");
 	ft_putstr(name);
 	ft_putstr(" -- ");
-	ft_putnbr(info, base);
-	if (base == 10)
-		ft_putstr(" octets");
+	if (size)
+	{
+		ft_putnbr(size, 10);
+		ft_putstr(" octets | ");
+	}
+	if (ptr)
+	{
+		ft_putnbr((size_t)ptr, 16);
+	}
 	ft_putstr("\n");
 }

@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:18:41 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 09:19:10 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 10:38:35 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void			*malloc(size_t size)
 	void		*block;
 
 	lock();
-	if (DCALL)
-		debug_call("malloc", size, 10);
+	if (DCALLTRACE)
+		debug_call("malloc ", size, NULL);
 	if (size > (~(size_t)0 >> 3))
 		return (NULL);
 	if (size <= TINY)
