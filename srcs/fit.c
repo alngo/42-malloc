@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:28:59 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 09:56:17 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 10:29:56 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,15 @@
 int			fit_in(void *heap, void *block, size_t size)
 {
 	void	*ptr;
-	uint8_t	fit_size;
-	uint8_t	fit_in_heap;
+	void	*limit;
 
-	fit_size = 0;
-	fit_in_heap = 0;
-
-	if (meta(block)->size == 0 || meta(block)->size >= size)
-		fit_size = 1;
 	ptr = block + sizeof(t_meta) + size;
-	if (ptr <= (heap + sizeof(t_meta) + meta(heap)->size))
-		fit_in_heap = 1;
-	return (fit_size && fit_in_heap);
+	limit = heap + sizeof(t_meta) + meta(heap)->size;
+	if (meta(block)->size == 0 && ptr <= limit)
+		return (1);
+	else if (meta(block)->next < payload(block) + size)
+		return (1);
+	return(0);
 }
 
 void		*fit_block_large(void *heap, size_t size)
