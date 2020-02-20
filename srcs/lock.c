@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mem.c                                              :+:      :+:    :+:   */
+/*   lock.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/19 13:13:10 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 09:21:14 by alngo            ###   ########.fr       */
+/*   Created: 2020/02/20 09:13:48 by alngo             #+#    #+#             */
+/*   Updated: 2020/02/20 09:20:05 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void			*ft_memcpy(void *s1, const void *s2, size_t n)
-{
-	size_t	i;
+pthread_mutex_t		g_lock;
 
-	i = 0;
-	while (i < n)
+int					init_lock(void)
+{
+	if (pthread_mutex_init(&g_lock, NULL) != 0)
+		return (1);
+	return (0);
+}
+
+void				lock(void)
+{
+	if (!init_lock())
 	{
-		((unsigned char *)s1)[i] = ((unsigned char *)s2)[i];
-		i++;
+		pthread_mutex_lock(&g_lock);
 	}
-	return (s1);
+}
+
+void				unlock(void)
+{
+	if (!init_lock())
+	{
+		pthread_mutex_unlock(&g_lock);
+	}
 }

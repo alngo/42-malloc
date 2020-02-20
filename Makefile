@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/02/19 16:11:30 by alngo            ###   ########.fr        #
+#    Updated: 2020/02/20 09:17:31 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRC_NAME := 	malloc.c			\
 				block.c 			\
 				fit.c				\
 				mem.c				\
-				debug.c
+				debug.c				\
+				lock.c
 
 
 OBJ_NAME := $(SRC_NAME:.c=.o)

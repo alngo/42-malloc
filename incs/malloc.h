@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 17:20:41 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 09:23:19 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ size_t					size_alignment(size_t size, size_t alignment);
 ** mem.c
 */
 void					*ft_memcpy(void *s1, const void *s2, size_t n);
-void					ft_bzero(void *dst, size_t n);
 
 /*
 ** out.c
@@ -133,5 +132,12 @@ void					debug_block(void *payload, t_meta *data);
 void					debug_output(const char *name);
 void					debug_call(const char *name, size_t info,
 		unsigned int base);
+
+/*
+** lock.c
+*/
+
+void					lock(void);
+void					unlock(void);
 
 #endif
