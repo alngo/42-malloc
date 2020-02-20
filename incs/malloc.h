@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 10:38:44 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 11:13:55 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 # ifndef DCALLTRACE
 
-#  define DCALLTRACE0
+#  define DCALLTRACE 0
 
 # endif
 
@@ -130,8 +130,8 @@ void					ft_putmem(const void *ptr, size_t n);
 
 void					debug_block(void *payload, t_meta *data);
 void					debug_output(const char *name);
-void					debug_call(const char *name, size_t size,
-		void *ptr);
+void					debug_call(const char *name, size_t size, void *ptr);
+void					debug_process(const char *name, int depth);
 
 /*
 ** lock.c

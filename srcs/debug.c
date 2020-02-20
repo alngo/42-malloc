@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 13:35:29 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 10:41:19 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 11:14:11 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,16 @@ void				debug_call(const char *name, size_t size,
 	{
 		ft_putnbr((size_t)ptr, 16);
 	}
+	ft_putstr("\n");
+}
+
+void				debug_process(const char *name, int depth)
+{
+	while (depth > 0)
+	{
+		ft_putstr("\t");
+		depth--;
+	}
+	ft_putstr(name);
 	ft_putstr("\n");
 }

@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:18:41 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 10:38:35 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 11:10:18 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			*malloc(size_t size)
 
 	lock();
 	if (DCALLTRACE)
-		debug_call("malloc ", size, NULL);
+		debug_call("malloc     ", size, NULL);
 	if (size > (~(size_t)0 >> 3))
 		return (NULL);
 	if (size <= TINY)
@@ -29,6 +29,8 @@ void			*malloc(size_t size)
 		block = fit_block(&g_arena.small, size);
 	else
 		block = fit_block(&g_arena.large, size);
+	if (DCALLTRACE)
+		debug_call("malloc_end ", size, block);
 	if (DEBUG)
 		debug_output("malloc");
 	unlock();
