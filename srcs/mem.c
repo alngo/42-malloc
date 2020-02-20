@@ -17,6 +17,8 @@ void			*ft_memcpy(void *s1, const void *s2, size_t n)
 	size_t	i;
 
 	i = 0;
+	if (DCALLTRACE >= 2)
+		debug_process("ft_memcpy", 2);
 	while (i < n)
 	{
 		((unsigned char *)s1)[i] = ((unsigned char *)s2)[i];

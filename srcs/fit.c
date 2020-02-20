@@ -19,7 +19,7 @@ int			fit_in(void *heap, void *block, size_t size)
 
 	ptr = block + sizeof(t_meta) + size;
 	limit = heap + meta(heap)->size;
-	if (DCALLTRACE >= 2)
+	if (DCALLTRACE >= 3)
 		debug_process("fit_in", 3);
 	if (meta(block)->size == 0 && ptr <= limit)
 		return (1);
@@ -54,8 +54,8 @@ void		*fit_block_tiny_small(void *heap, size_t size)
 		if (!(meta(block)->flags & INUSE) && fit_in(heap, block, aligned_size))
 		{
 			next = meta(block)->next ? meta(block)->next :
-				block + sizeof(t_meta) + aligned_size;
-			set_meta(block, size, INUSE, next);
+				(block + sizeof(t_meta) + aligned_size);
+			set_meta(block, size, meta(block)->flags | INUSE, next);
 			break ;
 		}
 		block = meta(block)->next;

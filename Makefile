@@ -21,7 +21,7 @@ SLNK := libft_malloc.so
 
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror
-DEBUGFLAGS := -DDEBUG -DDCALLTRACE=2
+DEBUGFLAGS := -DDCALLTRACE=3
 
 SRC_PATH := srcs
 OBJ_PATH := objs

@@ -16,6 +16,8 @@ void		*realloc_minimum_size(void *ptr)
 {
 	void	*block;
 
+	if (DCALLTRACE >= 1)
+		debug_process("realloc_large", 1);
 	free(ptr);
 	if (!(block = malloc(0)))
 		return (NULL);
@@ -26,6 +28,8 @@ void		*realloc_large(void *ptr, t_meta *data, size_t size)
 {
 	void	*block;
 
+	if (DCALLTRACE >= 1)
+		debug_process("realloc_large", 1);
 	if (size == data->size)
 		return (ptr);
 	if (!(block = malloc(size)))
@@ -39,6 +43,8 @@ void		*realloc_tiny_small(void *ptr, t_meta *data, size_t size)
 {
 	void	*block;
 
+	if (DCALLTRACE >= 1)
+		debug_process("realloc_tiny_small", 1);
 	if (size <= data->size || size < (size_t)(data->next - ptr))
 	{
 		set_meta(data, size, data->flags | INUSE, data->next);

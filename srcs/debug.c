@@ -14,24 +14,20 @@
 
 void				debug_block(void *payload, t_meta *data)
 {
-	(void)payload;
-	if (data->size)
+	ft_putstr("---------------------------------------------\n");
+	ft_putstr("\033[0;32mstart: ");
+	ft_putnbr((size_t)(void *)data, 16);
+	ft_putstr("\n---------------------------------------------\n");
+	ft_putstr("\033[0;34msize:  ");
+	ft_putnbr(data->size, 10);
+	ft_putstr("\n\033[0;33mflags: ");
+	ft_putnbr(data->flags, 2);
+	ft_putstr("\n\033[0;36mnext:  ");
+	ft_putnbr((size_t)data->next, 16);
+	ft_putstr("\033[0m\n");
+	if (HEXMEM)
 	{
-		ft_putstr("---------------------------------------------\n");
-		ft_putstr("\033[0;32mstart: ");
-		ft_putnbr((size_t)(void *)data, 16);
-		ft_putstr("\n---------------------------------------------\n");
-		ft_putstr("\033[0;34msize:  ");
-		ft_putnbr(data->size, 10);
-		ft_putstr("\n\033[0;33mflags: ");
-		ft_putnbr(data->flags, 2);
-		ft_putstr("\n\033[0;36mnext:  ");
-		ft_putnbr((size_t)data->next, 16);
-		ft_putstr("\033[0m\n");
-		if (HEXMEM)
-		{
-			ft_putmem(payload, HEXMEM == 1 ? data->size : HEXMEM);
-		}
+		ft_putmem(payload, HEXMEM == 1 ? data->size : HEXMEM);
 	}
 }
 
