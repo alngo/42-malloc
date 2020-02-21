@@ -44,13 +44,14 @@ void		*get_heap_surrounding(void *start, void *heap,
 
 	page = start;
 	*prec = NULL;
+	*next = NULL;
 	while (page)
 	{
 		*next = meta(page)->next;
 		if (page == heap)
 			return (page);
-		*prec = meta(page);
-		page = meta(page)->next;
+		*prec = page;
+		page = *next;
 	}
 	return (NULL);
 }
@@ -97,5 +98,5 @@ void		delete_heap(void *heap)
 	}
 	if (prec)
 		meta(prec)->next = next;
-	munmap(heap, meta(heap)->size + sizeof(t_meta));
+	munmap(target, meta(heap)->size + sizeof(t_meta));
 }

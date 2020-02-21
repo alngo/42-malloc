@@ -55,7 +55,7 @@ void		*fit_block_tiny_small(void *heap, size_t size)
 		{
 			next = meta(block)->next ? meta(block)->next :
 				(block + sizeof(t_meta) + aligned_size);
-			set_meta(block, size, meta(block)->flags | INUSE, next);
+			set_meta(block, size, INUSE, next);
 			break ;
 		}
 		block = meta(block)->next;
