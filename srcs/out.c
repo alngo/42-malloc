@@ -44,7 +44,7 @@ void				ft_nbr_out(size_t value, size_t len, unsigned int base)
 	ft_putstr(str);
 }
 
-char				*ft_putnbr(size_t value, unsigned int base)
+void				ft_putnbr(size_t value, unsigned int base)
 {
 	size_t			i;
 	size_t			len;
@@ -54,7 +54,6 @@ char				*ft_putnbr(size_t value, unsigned int base)
 	while (i /= base)
 		len++;
 	ft_nbr_out(value, len, base);
-	return (NULL);
 }
 
 static void			print_memory_pad(size_t i, char *buf)

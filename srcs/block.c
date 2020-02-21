@@ -17,8 +17,8 @@ void		*get_block_large(void *ptr, void *start, void **heap)
 	void	*page;
 
 	page = start;
-	if (DCALLTRACE >= 2)
-		debug_process("get_block_large", 2);
+	if (DCALLTRACE >= 4)
+		debug_process("get_block_large", 4);
 	while (page)
 	{
 		if (payload(page) == ptr && meta(page)->flags & INUSE)
@@ -39,8 +39,8 @@ void		*get_block_tiny_small(void *ptr, void *start, void **heap)
 
 	page = start;
 	block = payload(page);
-	if (DCALLTRACE >= 2)
-		debug_process("get_block_tiny_small", 2);
+	if (DCALLTRACE >= 4)
+		debug_process("get_block_tiny_small", 4);
 	while (page)
 	{
 		while (block)
@@ -64,8 +64,8 @@ void		*get_block(void *ptr, void **heap)
 	void	*target;
 
 	target = NULL;
-	if (DCALLTRACE >= 1)
-		debug_process("get_block", 1);
+	if (DCALLTRACE >= 3)
+		debug_process("get_block", 3);
 	if ((target = get_block_tiny_small(ptr, g_arena.tiny, heap)))
 		return (target);
 	else if ((target = get_block_tiny_small(ptr, g_arena.small, heap)))

@@ -114,6 +114,7 @@ size_t					size_alignment(size_t size, size_t alignment);
 /*
 ** mem.c
 */
+
 void					*ft_memcpy(void *s1, const void *s2, size_t n);
 
 /*
@@ -121,7 +122,7 @@ void					*ft_memcpy(void *s1, const void *s2, size_t n);
 */
 
 void					ft_putstr(const char *str);
-char					*ft_putnbr(size_t value, unsigned int base);
+void					ft_putnbr(size_t value, unsigned int base);
 void					ft_putmem(const void *ptr, size_t n);
 
 /*
