@@ -92,7 +92,6 @@ run_all()
 {
 	run_nm
 	run_base
-	run_base_test1
 	run_test1
 	run_test2
 	run_test3
