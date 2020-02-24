@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:21:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 11:19:19 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/24 15:09:08 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		*realloc(void *ptr, size_t size)
 	if (!ptr)
 		return (malloc(size));
 	if (!(block = get_block(ptr, NULL)))
-		return (NULL);
+		return (ptr);
 	if (size == 0)
 		new_block = realloc_minimum_size(ptr);
 	else if (meta(block)->flags & MMAPD)
