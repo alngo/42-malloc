@@ -1,6 +1,5 @@
-# ft_malloc
+# ft_malloc [![Build Status](https://travis-ci.com/alngo/libft_malloc.svg?branch=dev)](https://travis-ci.com/alngo/libft_malloc)
 Projet plutôt UNIX
-
 
 ### Description
 
@@ -19,3 +18,34 @@ void show_alloc_mem();
   - getrlimit
   - libpthread
   - libft
+
+### Structure
+
+```
+[tiny][small]:
+
+Arenas:					=> arena are getpagesize() aligned
+	[size|flags][next] 	=> 16bits; 
+	[null]
+or:
+	[size|flags][next] 	=> 16bits;
+	[...]				=> payload are sizeof(void *) aligned
+	[...]
+	[...]
+	[...]
+	[size|flags][next] 	=> 16bits;
+	[...]
+	[...]
+
+[large]:
+	[size|flags][next] 	=> 16bits;
+	[...]
+	[...]
+	[...]
+	[...]
+	[size|flags][next] 	=> 16bits;
+	[...]
+	[...]
+
+flas = Mmap'd | PrevInUse
+```
