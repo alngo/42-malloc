@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/02/24 15:38:03 by alngo            ###   ########.fr        #
+#    Updated: 2020/02/24 15:53:45 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ $(NAME): $(OBJ_PATH) $(OBJ)
 
 test: $(NAME)
 	./units.sh
+	@make test -C ./hardtests/
+	@make test -C ./tests/
 
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH) 2> /dev/null || true

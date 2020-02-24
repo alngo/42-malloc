@@ -3,7 +3,7 @@
 dir=.
 src=srcs
 out=outs
-lft=../libft_malloc.so
+lft=../../libft_malloc.so
 
 mkdir $out
 gcc -o $dir/$out/test0 	$dir/$src/test0.c;
@@ -12,7 +12,7 @@ gcc -o $dir/$out/test2 	$dir/$src/test2.c;
 gcc -o $dir/$out/test3 	$dir/$src/test3.c;
 gcc -o $dir/$out/test3b $dir/$src/test3b.c;
 gcc -o $dir/$out/test4 	$dir/$src/test4.c;
-gcc -o $dir/$out/test5 	$dir/$src/test5.c -I ../incs/ -L../ -lft_malloc;
+gcc -o $dir/$out/test5 	$dir/$src/test5.c -I ../../incs/ -L../../ -lft_malloc;
 
 run_nm()
 {
@@ -84,7 +84,7 @@ run_test5()
 	echo "export DYLD_LIBRARY_PATH=../"
 	echo "./run.sh /usr/bin/time -l $out/test5"
 	echo "==================================="
-	export DYLD_LIBRARY_PATH=../
+	export DYLD_LIBRARY_PATH=../../
 	./$out/test5
 }
 

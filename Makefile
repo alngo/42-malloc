@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/02/24 15:41:37 by alngo            ###   ########.fr        #
+#    Updated: 2020/02/24 15:52:00 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SLNK := libft_malloc.so
 
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror
-DEBUGFLAGS := -DDCALLTRACE
+DEBUGFLAGS :=
 
 SRC_PATH := srcs
 OBJ_PATH := objs
@@ -74,12 +74,6 @@ fclean:	clean
 
 ci: $(NAME)
 	make test -C ci/
-
-test: $(NAME)
-	make -C tests/
-
-hardtest: $(NAME)
-	make test -C hardtests/
 
 re:	fclean all
 

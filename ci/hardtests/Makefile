@@ -1,5 +1,5 @@
 
-INCS_PATHS		= ./ ../incs ./printf/incs
+INCS_PATHS		= ./ ../../incs ./printf/incs
 
 NAME			= test_malloc
 
