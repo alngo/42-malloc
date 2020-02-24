@@ -6,20 +6,21 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:18:41 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 16:06:02 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 12:01:00 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_arena		g_arena = {NULL, NULL, NULL};
+t_arena			g_arena = {NULL, NULL, NULL};
 
-void		*malloc(size_t size)
+void			*malloc(size_t size)
 {
-	void	*block;
+	void		*block;
 
-	if (DCALL)
-		debug_call("malloc", size, 10);
+	lock();
+	if (DCALLTRACE)
+		debug_call("malloc     ", size, NULL);
 	if (size > (~(size_t)0 >> 3))
 		return (NULL);
 	if (size <= TINY)
@@ -28,9 +29,10 @@ void		*malloc(size_t size)
 		block = fit_block(&g_arena.small, size);
 	else
 		block = fit_block(&g_arena.large, size);
+	if (DCALLTRACE)
+		debug_call("malloc_end ", size, block);
 	if (DEBUG)
 		debug_output("malloc");
-	if (block)
-		return (payload(block));
-	return (NULL);
+	unlock();
+	return (block ? payload(block) : NULL);
 }

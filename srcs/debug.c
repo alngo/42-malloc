@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 13:35:29 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 16:06:22 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 11:14:11 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,20 @@
 
 void				debug_block(void *payload, t_meta *data)
 {
-	(void)payload;
-	if (data->size)
+	ft_putstr("---------------------------------------------\n");
+	ft_putstr("\033[0;32mstart: ");
+	ft_putnbr((size_t)(void *)data, 16);
+	ft_putstr("\n---------------------------------------------\n");
+	ft_putstr("\033[0;34msize:  ");
+	ft_putnbr(data->size, 10);
+	ft_putstr("\n\033[0;33mflags: ");
+	ft_putnbr(data->flags, 2);
+	ft_putstr("\n\033[0;36mnext:  ");
+	ft_putnbr((size_t)data->next, 16);
+	ft_putstr("\033[0m\n");
+	if (HEXMEM)
 	{
-		ft_putstr("---------------------------------------------\n");
-		ft_putstr("\033[0;32mstart: ");
-		ft_putnbr((size_t)(void *)data, 16);
-		ft_putstr("\n---------------------------------------------\n");
-		ft_putstr("\033[0;34msize:  ");
-		ft_putnbr(data->size, 10);
-		ft_putstr("\n\033[0;33mflags: ");
-		ft_putnbr(data->flags, 2);
-		ft_putstr("\n\033[0;36mnext:  ");
-		ft_putnbr((size_t)data->next, 16);
-		ft_putstr("\033[0m\n");
-		if (HEXMEM)
-		{
-			ft_putmem(payload, HEXMEM == 1 ? data->size : HEXMEM);
-		}
+		ft_putmem(payload, HEXMEM == 1 ? data->size : HEXMEM);
 	}
 }
 
@@ -64,14 +60,31 @@ void				debug_output(const char *name)
 	ft_putstr(":\n====================================\n");
 }
 
-void				debug_call(const char *name, size_t info,
-		unsigned int base)
+void				debug_call(const char *name, size_t size,
+		void *ptr)
 {
 	ft_putstr("CALL: ");
 	ft_putstr(name);
 	ft_putstr(" -- ");
-	ft_putnbr(info, base);
-	if (base == 10)
-		ft_putstr(" octets");
+	if (size)
+	{
+		ft_putnbr(size, 10);
+		ft_putstr(" octets | ");
+	}
+	if (ptr)
+	{
+		ft_putnbr((size_t)ptr, 16);
+	}
+	ft_putstr("\n");
+}
+
+void				debug_process(const char *name, int depth)
+{
+	while (depth > 0)
+	{
+		ft_putstr("\t");
+		depth--;
+	}
+	ft_putstr(name);
 	ft_putstr("\n");
 }

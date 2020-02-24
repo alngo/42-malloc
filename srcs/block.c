@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:03:38 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 12:05:04 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 12:07:48 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void		*get_block_large(void *ptr, void *start, void **heap)
 	void	*page;
 
 	page = start;
+	if (DCALLTRACE >= 4)
+		debug_process("get_block_large", 4);
 	while (page)
 	{
 		if (payload(page) == ptr && meta(page)->flags & INUSE)
@@ -37,6 +39,8 @@ void		*get_block_tiny_small(void *ptr, void *start, void **heap)
 
 	page = start;
 	block = payload(page);
+	if (DCALLTRACE >= 4)
+		debug_process("get_block_tiny_small", 4);
 	while (page)
 	{
 		while (block)
@@ -60,6 +64,8 @@ void		*get_block(void *ptr, void **heap)
 	void	*target;
 
 	target = NULL;
+	if (DCALLTRACE >= 3)
+		debug_process("get_block", 3);
 	if ((target = get_block_tiny_small(ptr, g_arena.tiny, heap)))
 		return (target);
 	else if ((target = get_block_tiny_small(ptr, g_arena.small, heap)))

@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 12:33:28 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 13:47:05 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/20 11:59:24 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void		*init_heap(size_t size)
 	ptr = NULL;
 	pagesize = getpagesize();
 	offset = sizeof(t_meta);
+	if (DCALLTRACE >= 2)
+		debug_process("init_heap", 2);
 	if (size < TINY)
 		heap_size = size_alignment(offset + ((TINY + offset) * 100), pagesize);
 	else if (size < SMALL)
@@ -39,15 +41,17 @@ void		*get_heap_surrounding(void *start, void *heap,
 		void **prec, void **next)
 {
 	void	*page;
+
 	page = start;
 	*prec = NULL;
+	*next = NULL;
 	while (page)
 	{
 		*next = meta(page)->next;
 		if (page == heap)
 			return (page);
-		*prec = meta(page);
-		page = meta(page)->next;
+		*prec = page;
+		page = *next;
 	}
 	return (NULL);
 }
@@ -94,5 +98,5 @@ void		delete_heap(void *heap)
 	}
 	if (prec)
 		meta(prec)->next = next;
-	munmap(heap, meta(heap)->size + sizeof(t_meta));
+	munmap(target, meta(heap)->size + sizeof(t_meta));
 }
