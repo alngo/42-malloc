@@ -1,4 +1,4 @@
-# ft_malloc [![Build Status](https://travis-ci.com/alngo/libft_malloc.svg?branch=dev)](https://travis-ci.com/alngo/libft_malloc)
+# ft_malloc [![Build Status](https://travis-ci.com/alngo/libft_malloc.svg?branch=master)](https://travis-ci.com/alngo/libft_malloc)
 Projet plutôt UNIX
 
 ### Description
@@ -47,5 +47,17 @@ or:
 	[...]
 	[...]
 
-flas = Mmap'd | PrevInUse
+flags = Mmap'd | PrevInUse
 ```
+
+### Debug flags
+
+`-DDCALLTRACE=[1-4]`
+> Print call trace
+
+`-DDHEXMEM=[1-...]`
+> Print hex memory for x bytes
+
+`-DDEBUG`
+> show_allocation_mem after malloc, realloc, free call
+
