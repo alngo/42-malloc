@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:17:56 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 11:13:55 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/24 13:33:45 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 
 # endif
 
-# ifndef HEXMEM
+# ifndef DHEXMEM
 
-#  define HEXMEM 0
+#  define DHEXMEM 0
 
 # endif
 
