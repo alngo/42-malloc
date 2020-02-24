@@ -8,4 +8,4 @@ os:
         - linux
         - osx
 script:
-        make ci
+        make ci && make test && make hardtest

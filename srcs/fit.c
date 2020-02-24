@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:28:59 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/24 14:11:38 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/24 15:39:02 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		*fit_block_tiny_small(void *heap, size_t size)
 
 	block = payload(heap);
 	next = NULL;
-	aligned_size = size_alignment(size, sizeof(void *));
+	aligned_size = size_alignment(size, 16);
 	if (DCALLTRACE >= 3)
 		debug_process("fit_block_tiny_small", 3);
 	while (block)
