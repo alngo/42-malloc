@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 13:35:29 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 11:14:11 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/24 13:33:37 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void				debug_block(void *payload, t_meta *data)
 	ft_putstr("\n\033[0;36mnext:  ");
 	ft_putnbr((size_t)data->next, 16);
 	ft_putstr("\033[0m\n");
-	if (HEXMEM)
+	if (DHEXMEM)
 	{
-		ft_putmem(payload, HEXMEM == 1 ? data->size : HEXMEM);
+		ft_putmem(payload, DHEXMEM == 1 ? data->size : DHEXMEM);
 	}
 }
 

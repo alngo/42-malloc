@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:28:59 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 11:59:10 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/24 14:11:38 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ int			fit_in(void *heap, void *block, size_t size)
 	limit = heap + meta(heap)->size;
 	if (DCALLTRACE >= 4)
 		debug_process("fit_in", 4);
-	if (meta(block)->size == 0 && ptr <= limit)
+	if (meta(block)->flags & INUSE)
+		return (0);
+	else if (meta(block)->size == 0 && ptr < limit)
 		return (1);
-	else if (meta(block)->next < payload(block) + size)
+	else if (meta(block)->next >= payload(block) + size)
 		return (1);
 	return (0);
 }
@@ -51,7 +53,7 @@ void		*fit_block_tiny_small(void *heap, size_t size)
 		debug_process("fit_block_tiny_small", 3);
 	while (block)
 	{
-		if (!(meta(block)->flags & INUSE) && fit_in(heap, block, aligned_size))
+		if (fit_in(heap, block, aligned_size))
 		{
 			next = meta(block)->next ? meta(block)->next :
 				(block + sizeof(t_meta) + aligned_size);
@@ -69,6 +71,7 @@ void		*fit_block(void **heap, size_t size)
 
 	if (DCALLTRACE >= 2)
 		debug_process("fit_block", 2);
+
 	if (!*heap && !(*heap = init_heap(size)))
 		return (NULL);
 	if (size <= SMALL)
