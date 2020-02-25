@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 12:03:54 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 12:54:16 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/25 10:15:31 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static char *rand_string(char *str, size_t size)
 {
-    const char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJK1234567890";
-    if (size) {
-        --size;
-        for (size_t n = 0; n < size; n++) {
-            int key = rand() % (int) (sizeof charset - 1);
-            str[n] = charset[key];
-        }
-        str[size] = '\0';
-    }
-    return str;
+	const char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJK1234567890";
+	if (size) {
+		--size;
+		for (size_t n = 0; n < size; n++) {
+			int key = rand() % (int) (sizeof charset - 1);
+			str[n] = charset[key];
+		}
+		str[size] = '\0';
+	}
+	return str;
 }
 
 MU_TEST(realloc_test_large_to_tiny)
@@ -168,6 +168,164 @@ MU_TEST(realloc_test_lower_size)
 	free(ptr_b);
 }
 
+MU_TEST(realloc_test_multiple)
+{
+	void		*ptr[5000];
+
+	for (size_t i = 1; i < 5000; i += 3)
+	{
+		ptr[i] = realloc(NULL, i);
+		mu_check(ptr[i] != NULL);
+		memset(ptr[i], 'a', i);
+		mu_check((uintptr_t)ptr[i] % 16 == 0);
+	}
+
+	for (size_t i = 1; i < 5000; i += 3)
+	{
+		char	cmp[i];
+
+		memset(cmp, 'a', i);
+		if (memcmp(cmp, ptr[i], i) != 0)
+			mu_fail("Segment is corrupted: ");
+	}
+
+	for (size_t i = 1; i < 5000; i += 3)
+	{
+		char	cmp[i];
+
+		memset(cmp, 'a', i);
+		if (memcmp(cmp, ptr[i], i) != 0)
+			mu_fail("Segment is corrupted: ");
+		free(ptr[i]);
+	}
+}
+
+MU_TEST(realloc_test_same_size)
+{
+	void		*ptr[5000];
+
+	for (size_t i = 1; i < 5000, i += 3)
+	{
+		ptr[i] = malloc(i);
+		mu_check(ptr[i] != NULL);
+		ptr[i] = realloc(ptr[i], i);
+		mu_check(ptr[i] != NULL);
+		memset(ptr[i], 'a', i);
+		mu_check((uintptr_t)ptr[i] % 16 == 0);
+	}
+
+	for (size_t i = 1; i < 5000; i += 3)
+	{
+		char	cmp[i];
+
+		memset(cmp, 'a', i);
+		if (memcmp(cmp, ptr[i], i) != 0)
+			mu_fail("Segment is corrupted: ");
+	}
+
+	for (size_t i = 1; i < 5000; i += 3)
+	{
+		char	cmp[i];
+
+		memset(cmp, 'a', i);
+		if (memcmp(cmp, ptr[i], i) != 0)
+			mu_fail("Segment is corrupted: ");
+		free(ptr[i]);
+	}
+}
+
+MU_TEST(realloc_test_memset1)
+{
+	void		*ptr[5000];
+
+	for (size_t i = 1; i < 5000, i += 3)
+	{
+		ptr[i] = malloc(i);
+		mu_check(ptr[i] != NULL);
+		memset(ptr[i], 'a', i);
+		mu_check((uintptr_t)ptr[i] % 16 == 0);
+	}
+
+	for (size_t i = 1; i < 5000, i += 3)
+	{
+		char	cmp[i];
+
+		ptr[i] = realloc(ptr[i], i);
+		mu_check(ptr[i] != NULL);
+		memset(ptr[i], 'a', i);
+		mu_check((uintptr_t)ptr[i] % 16 == 0);
+
+		memset(cmp, 'a', i);
+		if (memcmp(cmp, ptr[i], i) != 0)
+			mu_fail("Segment is corrupted: ");
+	}
+
+	for (size_t i = 1; i < 5000; i += 3)
+	{
+		char	cmp[i];
+
+		memset(cmp, 'a', i);
+		if (memcmp(cmp, ptr[i], i) != 0)
+			mu_fail("Segment is corrupted: ");
+	}
+
+	for (size_t i = 1; i < 5000; i += 3)
+	{
+		char	cmp[i];
+
+		memset(cmp, 'a', i);
+		if (memcmp(cmp, ptr[i], i) != 0)
+			mu_fail("Segment is corrupted: ");
+		free(ptr[i]);
+	}
+}
+
+MU_TEST(realloc_test_memset2)
+{
+	void		*ptr[5000];
+
+	for (size_t i = 2; i < 5000, i += 3)
+	{
+		ptr[i] = malloc(i);
+		mu_check(ptr[i] != NULL);
+		memset(ptr[i], 'a', i);
+		mu_check((uintptr_t)ptr[i] % 16 == 0);
+	}
+
+	for (size_t i = 2; i < 5000, i += 3)
+	{
+		char	cmp[i];
+
+		ptr[i] = realloc(ptr[i], i / 2);
+		mu_check(ptr[i] != NULL);
+		memset(ptr[i], 'a', i);
+		mu_check((uintptr_t)ptr[i] % 16 == 0);
+
+		memset(cmp, 'a', i);
+		if (memcmp(cmp, ptr[i], i) != 0)
+			mu_fail("Segment is corrupted: ");
+	}
+
+	for (size_t i = 2; i < 5000; i += 3)
+	{
+		char	cmp[i / 2];
+
+		memset(cmp, 'a', i / 2);
+		if (memcmp(cmp, ptr[i], i / 2) != 0)
+			mu_fail("Segment is corrupted: ");
+	}
+
+	for (size_t i = 2; i < 5000; i += 3)
+	{
+		char	cmp[i / 2];
+
+		memset(cmp, 'a', i / 2);
+		if (memcmp(cmp, ptr[i], i / 2) != 0)
+			mu_fail("Segment is corrupted: ");
+		free(ptr[i]);
+	}
+}
+
 MU_TEST_SUITE(realloc_test_suite)
 {
 	MU_RUN_TEST(realloc_test_lower_size);
@@ -176,6 +334,10 @@ MU_TEST_SUITE(realloc_test_suite)
 	MU_RUN_TEST(realloc_test_small_payload);
 	MU_RUN_TEST(realloc_test_large_payload);
 	MU_RUN_TEST(realloc_test_large_to_tiny);
+	MU_RUN_TEST(realloc_test_multiple_call);
+	MU_RUN_TEST(realloc_test_same_size);
+	MU_RUN_TEST(realloc_test_memset1);
+	MU_RUN_TEST(realloc_test_memset2);
 }
 
 int realloc_test()

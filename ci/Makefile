@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/02/24 16:57:50 by alngo            ###   ########.fr        #
+#    Updated: 2020/02/25 09:59:23 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,7 @@ $(NAME): $(OBJ_PATH) $(OBJ)
 
 test: $(NAME)
 	./units.sh
-	@make test -C ./tests/
-	@make test -C ./hardtests/
+#	@make test -C ./tests/
 
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
@@ -52,12 +51,10 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	$(CC) $(CFLAGS) -I $(INC_PATH)/ -I ../$(INC_PATH)/ -MMD -MP -c $< -o $@
 
 clean:
-	make clean -C hardtests/
 	make clean -C tests/
 	$(RM) -r $(OBJ_PATH)
 
 fclean:	clean
-	make fclean -C hardtests/
 	make fclean -C tests/
 	$(RM) -r $(NAME)
 
