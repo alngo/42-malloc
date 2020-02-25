@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 12:03:54 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/25 10:15:31 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/25 10:21:14 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ MU_TEST(realloc_test_lower_size)
 	free(ptr_b);
 }
 
-MU_TEST(realloc_test_multiple)
+MU_TEST(realloc_test_multiple_call)
 {
 	void		*ptr[5000];
 
@@ -204,7 +204,7 @@ MU_TEST(realloc_test_same_size)
 {
 	void		*ptr[5000];
 
-	for (size_t i = 1; i < 5000, i += 3)
+	for (size_t i = 1; i < 5000; i += 3)
 	{
 		ptr[i] = malloc(i);
 		mu_check(ptr[i] != NULL);
@@ -238,7 +238,7 @@ MU_TEST(realloc_test_memset1)
 {
 	void		*ptr[5000];
 
-	for (size_t i = 1; i < 5000, i += 3)
+	for (size_t i = 1; i < 5000; i += 3)
 	{
 		ptr[i] = malloc(i);
 		mu_check(ptr[i] != NULL);
@@ -246,7 +246,7 @@ MU_TEST(realloc_test_memset1)
 		mu_check((uintptr_t)ptr[i] % 16 == 0);
 	}
 
-	for (size_t i = 1; i < 5000, i += 3)
+	for (size_t i = 1; i < 5000; i += 3)
 	{
 		char	cmp[i];
 
@@ -284,7 +284,7 @@ MU_TEST(realloc_test_memset2)
 {
 	void		*ptr[5000];
 
-	for (size_t i = 2; i < 5000, i += 3)
+	for (size_t i = 2; i < 5000; i += 3)
 	{
 		ptr[i] = malloc(i);
 		mu_check(ptr[i] != NULL);
@@ -292,7 +292,7 @@ MU_TEST(realloc_test_memset2)
 		mu_check((uintptr_t)ptr[i] % 16 == 0);
 	}
 
-	for (size_t i = 2; i < 5000, i += 3)
+	for (size_t i = 2; i < 5000; i += 3)
 	{
 		char	cmp[i];
 
