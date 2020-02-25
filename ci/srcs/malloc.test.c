@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:38:00 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/25 09:59:40 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/25 11:23:07 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,6 @@ MU_TEST(malloc_test_memset3)
 		memset(cmp, 'a', i);
 		if (memcmp(cmp, ptr[i], i) != 0)
 			mu_fail("Segment is corrupted: ");
-		free(ptr[i]);
 	}
 
 	for (size_t i = 1; i < 5000; i += 3)
@@ -248,14 +247,13 @@ MU_TEST(malloc_test_memset4)
 
 		for (size_t i = 1; i < 5000; i += 3)
 		{
-			if (memcmp(cmp, ptr[i], i) != 0)
+			if (memcmp(cmp, ptr[i], len) != 0)
 				mu_fail("Segment is corrupted: ");
-			free(ptr[i]);
 		}
 
 		for (size_t i = 1; i < 5000; i += 3)
 		{
-			if (memcmp(cmp, ptr[i], i) != 0)
+			if (memcmp(cmp, ptr[i], len) != 0)
 				mu_fail("Segment is corrupted: ");
 			free(ptr[i]);
 		}
@@ -274,7 +272,7 @@ MU_TEST_SUITE(malloc_test_suite)
 	MU_RUN_TEST(malloc_test_memset1);
 	MU_RUN_TEST(malloc_test_memset2);
 	MU_RUN_TEST(malloc_test_memset3);
-	// MU_RUN_TEST(malloc_test_memset4);
+	MU_RUN_TEST(malloc_test_memset4);
 }
 
 int	malloc_test()

@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:28:59 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/24 15:39:02 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/25 10:43:04 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			fit_in(void *heap, void *block, size_t size)
 		return (0);
 	else if (meta(block)->size == 0 && ptr < limit)
 		return (1);
-	else if (meta(block)->next >= payload(block) + size)
+	else if (meta(block)->next >= ptr)
 		return (1);
 	return (0);
 }
@@ -71,7 +71,6 @@ void		*fit_block(void **heap, size_t size)
 
 	if (DCALLTRACE >= 2)
 		debug_process("fit_block", 2);
-
 	if (!*heap && !(*heap = init_heap(size)))
 		return (NULL);
 	if (size <= SMALL)

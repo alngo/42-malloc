@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 12:33:28 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/24 14:11:26 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/25 10:27:30 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void		*init_heap(size_t size)
 	else if (size <= SMALL)
 		heap_size = size_alignment(offset + ((SMALL + offset) * 100), pagesize);
 	else
-		heap_size = offset + size;
-	if ((ptr = mmap(ptr, heap_size, PROT_READ | PROT_WRITE,
+		heap_size = size_alignment(offset + size, 16);
+	if ((ptr = mmap(NULL, heap_size, PROT_READ | PROT_WRITE,
 					MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED)
 		return (NULL);
 	set_meta(ptr, heap_size - offset, MMAPD, NULL);
