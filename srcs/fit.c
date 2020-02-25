@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:28:59 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/25 10:43:04 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/25 11:57:37 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			fit_in(void *heap, void *block, size_t size)
 		debug_process("fit_in", 4);
 	if (meta(block)->flags & INUSE)
 		return (0);
-	else if (meta(block)->size == 0 && ptr < limit)
+	else if (meta(block)->size == 0 && ptr <= limit)
 		return (1);
 	else if (meta(block)->next >= ptr)
 		return (1);
@@ -47,16 +47,15 @@ void		*fit_block_tiny_small(void *heap, size_t size)
 	size_t	aligned_size;
 
 	block = payload(heap);
-	next = NULL;
 	aligned_size = size_alignment(size, 16);
 	if (DCALLTRACE >= 3)
 		debug_process("fit_block_tiny_small", 3);
 	while (block)
 	{
+		next = block + sizeof(t_meta) + aligned_size;
 		if (fit_in(heap, block, aligned_size))
 		{
-			next = meta(block)->next ? meta(block)->next :
-				(block + sizeof(t_meta) + aligned_size);
+			next = meta(block)->next ? meta(block)->next : next;
 			set_meta(block, size, INUSE, next);
 			break ;
 		}

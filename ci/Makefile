@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/02/25 10:22:05 by alngo            ###   ########.fr        #
+#    Updated: 2020/02/25 11:51:26 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ LFT := libft_malloc.so
 NAME := units.out
 
 CC := gcc
-CFLAGS := -DDCALLTRACE
+CFLAGS := -g
 
 SRC_PATH := srcs
 OBJ_PATH := objs

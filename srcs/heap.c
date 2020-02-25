@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 12:33:28 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/25 10:27:30 by alngo            ###   ########.fr       */
+/*   Updated: 2020/02/25 11:48:38 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ uint8_t		is_empty_heap(void *payload)
 	{
 		if (meta(block)->flags == MMAPD)
 			return (1);
-		if (meta(block)->flags & INUSE)
+		if (meta(block)->flags & INUSE && meta(block)->size > 0)
 			return (0);
 		block = meta(block)->next;
 	}
