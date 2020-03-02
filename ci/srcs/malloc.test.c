@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:38:00 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/25 11:23:07 by alngo            ###   ########.fr       */
+/*   Updated: 2020/03/02 12:16:07 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ MU_TEST(malloc_test_memset4)
 		{
 			ptr[i] = malloc(len);
 			mu_check(ptr[i] != NULL);
-			memset(ptr[i], 'a', i);
+			memset(ptr[i], 'a', len);
 			mu_check((uintptr_t)ptr[i] % 16 == 0);
 		}
 
@@ -272,7 +272,7 @@ MU_TEST_SUITE(malloc_test_suite)
 	MU_RUN_TEST(malloc_test_memset1);
 	MU_RUN_TEST(malloc_test_memset2);
 	MU_RUN_TEST(malloc_test_memset3);
-	MU_RUN_TEST(malloc_test_memset4);
+	//MU_RUN_TEST(malloc_test_memset4);
 }
 
 int	malloc_test()
