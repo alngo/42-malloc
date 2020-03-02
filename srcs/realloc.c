@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:21:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/03/02 12:23:12 by alngo            ###   ########.fr       */
+/*   Updated: 2020/03/02 13:33:54 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void		*realloc_minimum_size(void *ptr)
 
 	if (DCALLTRACE >= 2)
 		debug_process("realloc_minimum_size", 2);
-	free(ptr);
 	if (!(block = malloc(0)))
 		return (NULL);
+	free(ptr);
 	return (block - sizeof(t_meta));
 }
 

@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:03:38 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/20 12:07:48 by alngo            ###   ########.fr       */
+/*   Updated: 2020/03/02 13:32:33 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		*get_block_tiny_small(void *ptr, void *start, void **heap)
 		debug_process("get_block_tiny_small", 4);
 	while (page)
 	{
+		block = payload(page);
 		while (block)
 		{
 			if (payload(block) == ptr && meta(block)->flags & INUSE)
@@ -54,7 +55,6 @@ void		*get_block_tiny_small(void *ptr, void *start, void **heap)
 			block = meta(block)->next;
 		}
 		page = meta(page)->next;
-		block = payload(page);
 	}
 	return (NULL);
 }
