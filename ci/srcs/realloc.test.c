@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 12:03:54 by alngo             #+#    #+#             */
-/*   Updated: 2020/03/02 12:18:24 by alngo            ###   ########.fr       */
+/*   Updated: 2020/03/02 12:24:45 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -336,8 +336,8 @@ MU_TEST_SUITE(realloc_test_suite)
 	MU_RUN_TEST(realloc_test_large_to_tiny);
 	MU_RUN_TEST(realloc_test_multiple_call);
 	MU_RUN_TEST(realloc_test_same_size);
-	//MU_RUN_TEST(realloc_test_memset1);
-	//MU_RUN_TEST(realloc_test_memset2);
+	MU_RUN_TEST(realloc_test_memset1);
+	MU_RUN_TEST(realloc_test_memset2);
 }
 
 int realloc_test()
