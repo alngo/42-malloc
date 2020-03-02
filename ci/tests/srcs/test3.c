@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test3b.c                                           :+:      :+:    :+:   */
+/*   test3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/13 13:18:41 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 09:27:21 by alngo            ###   ########.fr       */
+/*   Created: 2020/02/13 13:18:12 by alngo             #+#    #+#             */
+/*   Updated: 2020/02/24 16:51:27 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/malloc.h"
+#include "../../../incs/malloc.h"
 #include <unistd.h>
 #include <string.h>
 
@@ -24,12 +24,10 @@ void		print(char *s)
 int			main(void)
 {
 	char	*addr1;
-	char	*addr2;
 	char	*addr3;
 
 	addr1 = (char *)malloc(16 * M);
 	strcpy(addr1, "Bonjour\n");
-	addr2 = (char *)malloc(16 * M);
 	print(addr1);
 	addr3 = (char *)realloc(addr1, 128 * M);
 	addr3[127 * M] = 42;

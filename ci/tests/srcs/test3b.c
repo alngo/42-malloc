@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test4.c                                            :+:      :+:    :+:   */
+/*   test3b.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/13 13:19:11 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/13 13:26:27 by alngo            ###   ########.fr       */
+/*   Created: 2020/02/13 13:18:41 by alngo             #+#    #+#             */
+/*   Updated: 2020/02/24 16:51:34 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/malloc.h"
+#include "../../../incs/malloc.h"
 #include <unistd.h>
 #include <string.h>
+
+#define M (1024 * 1024)
 
 void		print(char *s)
 {
@@ -21,13 +23,16 @@ void		print(char *s)
 
 int			main(void)
 {
-	char	*addr;
+	char	*addr1;
+	char	*addr2;
 	char	*addr3;
 
-	addr = malloc(16);
-	free(NULL);
-	free((void *)addr + 5);
-	if (realloc((void *)addr + 5, 10) == NULL)
-		print("Bonjour\n");
+	addr1 = (char *)malloc(16 * M);
+	strcpy(addr1, "Bonjour\n");
+	addr2 = (char *)malloc(16 * M);
+	print(addr1);
+	addr3 = (char *)realloc(addr1, 128 * M);
+	addr3[127 * M] = 42;
+	print(addr3);
 	return (0);
 }

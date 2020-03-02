@@ -6,7 +6,7 @@
 #    By: alngo <alngo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:57:02 by alngo             #+#    #+#              #
-#    Updated: 2020/02/24 15:09:19 by alngo            ###   ########.fr        #
+#    Updated: 2020/03/02 13:52:32 by alngo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,20 +63,18 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 
 clean:
 	make clean -C ci/
-	make clean -C tests/
 	$(RM) -r $(OBJ_PATH)
 
 fclean:	clean
 	make fclean -C ci/
-	make fclean -C tests/
 	$(RM) -r $(NAME)
 	$(RM) -r $(SLNK)
 
 ci: $(NAME)
 	make test -C ci/
 
-test: $(NAME)
-	make -C tests/
+42: $(NAME)
+	make 42 -C ci/
 
 re:	fclean all
 

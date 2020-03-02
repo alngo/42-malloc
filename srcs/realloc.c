@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:21:08 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/24 15:09:08 by alngo            ###   ########.fr       */
+/*   Updated: 2020/03/02 13:33:54 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void		*realloc_minimum_size(void *ptr)
 	void	*block;
 
 	if (DCALLTRACE >= 2)
-		debug_process("realloc_large", 2);
-	free(ptr);
+		debug_process("realloc_minimum_size", 2);
 	if (!(block = malloc(0)))
 		return (NULL);
+	free(ptr);
 	return (block - sizeof(t_meta));
 }
 
@@ -31,7 +31,7 @@ void		*realloc_large(void *ptr, t_meta *data, size_t size)
 	if (DCALLTRACE >= 2)
 		debug_process("realloc_large", 2);
 	if (size == data->size)
-		return (ptr);
+		return (ptr - sizeof(t_meta));
 	if (!(block = malloc(size)))
 		return (NULL);
 	ft_memcpy(block, ptr, data->size <= size ? data->size : size);

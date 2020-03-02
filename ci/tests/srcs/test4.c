@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test2.c                                            :+:      :+:    :+:   */
+/*   test4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/13 13:17:48 by alngo             #+#    #+#             */
-/*   Updated: 2020/02/19 11:57:24 by alngo            ###   ########.fr       */
+/*   Created: 2020/02/13 13:19:11 by alngo             #+#    #+#             */
+/*   Updated: 2020/02/24 16:51:41 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/malloc.h"
+#include "../../../incs/malloc.h"
+#include <unistd.h>
+#include <string.h>
+
+void		print(char *s)
+{
+	write(1, s, strlen(s));
+}
 
 int			main(void)
 {
-	int		i;
 	char	*addr;
+	char	*addr3;
 
-	i = 0;
-	while (i < 1024)
-	{
-		addr = (char *)malloc(1024);
-		addr[0] = 42;
-		free(addr);
-		i++;
-	}
+	addr = malloc(16);
+	free(NULL);
+	free((void *)addr + 5);
+	if (realloc((void *)addr + 5, 10) == NULL)
+		print("Bonjour\n");
 	return (0);
 }
