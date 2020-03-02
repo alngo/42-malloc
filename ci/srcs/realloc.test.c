@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 12:03:54 by alngo             #+#    #+#             */
-/*   Updated: 2020/03/02 13:52:57 by alngo            ###   ########.fr       */
+/*   Updated: 2020/03/02 14:13:53 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,9 +175,11 @@ MU_TEST(realloc_test_multiple_call)
 	for (size_t i = 1; i < 5000; i += 3)
 	{
 		ptr[i] = realloc(NULL, i);
-		mu_check(ptr[i] != NULL);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 		memset(ptr[i], 'a', i);
-		mu_check((uintptr_t)ptr[i] % 16 == 0);
 	}
 
 	for (size_t i = 1; i < 5000; i += 3)
@@ -207,11 +209,14 @@ MU_TEST(realloc_test_same_size)
 	for (size_t i = 1; i < 5000; i += 3)
 	{
 		ptr[i] = malloc(i);
-		mu_check(ptr[i] != NULL);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
 		ptr[i] = realloc(ptr[i], i);
-		mu_check(ptr[i] != NULL);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 		memset(ptr[i], 'a', i);
-		mu_check((uintptr_t)ptr[i] % 16 == 0);
 	}
 
 	for (size_t i = 1; i < 5000; i += 3)
@@ -241,9 +246,11 @@ MU_TEST(realloc_test_memset1)
 	for (size_t i = 1; i < 5000; i += 3)
 	{
 		ptr[i] = malloc(i);
-		mu_check(ptr[i] != NULL);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 		memset(ptr[i], 'a', i);
-		mu_check((uintptr_t)ptr[i] % 16 == 0);
 	}
 
 	for (size_t i = 1; i < 5000; i += 3)
@@ -251,9 +258,11 @@ MU_TEST(realloc_test_memset1)
 		char	cmp[i];
 
 		ptr[i] = realloc(ptr[i], i);
-		mu_check(ptr[i] != NULL);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 		memset(ptr[i], 'a', i);
-		mu_check((uintptr_t)ptr[i] % 16 == 0);
 
 		memset(cmp, 'a', i);
 		if (memcmp(cmp, ptr[i], i) != 0)
@@ -287,9 +296,11 @@ MU_TEST(realloc_test_memset2)
 	for (size_t i = 2; i < 5000; i += 3)
 	{
 		ptr[i] = malloc(i);
-		mu_check(ptr[i] != NULL);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 		memset(ptr[i], 'a', i);
-		mu_check((uintptr_t)ptr[i] % 16 == 0);
 	}
 
 	for (size_t i = 2; i < 5000; i += 3)
@@ -297,8 +308,10 @@ MU_TEST(realloc_test_memset2)
 		char	cmp[i / 2];
 
 		ptr[i] = realloc(ptr[i], i / 2);
-		mu_check(ptr[i] != NULL);
-		mu_check((uintptr_t)ptr[i] % 16 == 0);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 
 		memset(cmp, 'a', i / 2);
 		if (memcmp(cmp, ptr[i], i / 2) != 0)
@@ -332,7 +345,10 @@ MU_TEST(realloc_test_memset3)
 	for (size_t i = 1; i < 5000; i += 3)
 	{
 		ptr[i] = malloc(i);
-		mu_check(ptr[i] != NULL);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 		memset(ptr[i], 'a', i);
 	}
 
@@ -341,8 +357,10 @@ MU_TEST(realloc_test_memset3)
 		char	cmp[i];
 
 		ptr[i] = realloc(ptr[i], i * 2);
-		mu_check(ptr[i] != NULL);
-		mu_check((uintptr_t)ptr[i] % 16 == 0);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 
 		memset(cmp, 'a', i);
 		if (memcmp(cmp, ptr[i], i) != 0)
@@ -376,7 +394,10 @@ MU_TEST(realloc_test_memset4)
 	for (size_t i = 1; i < 5000; i += 3)
 	{
 		ptr[i] = malloc(i);
-		mu_check(ptr[i] != NULL);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 		memset(ptr[i], 'a', i);
 	}
 
@@ -385,9 +406,10 @@ MU_TEST(realloc_test_memset4)
 		char	cmp[i];
 
 		ptr[i] = realloc(ptr[i], i * 2);
-		mu_check(ptr[i] != NULL);
-		mu_check((uintptr_t)ptr[i] % 16 == 0);
-
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 		memset(cmp, 'a', i);
 		if (memcmp(cmp, ptr[i], i) != 0)
 			mu_fail("Segment is corrupted: ");
@@ -412,7 +434,6 @@ MU_TEST(realloc_test_memset4)
 		free(ptr[i]);
 	}
 }
-
 
 
 MU_TEST_SUITE(realloc_test_suite)

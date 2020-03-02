@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:38:00 by alngo             #+#    #+#             */
-/*   Updated: 2020/03/02 13:53:27 by alngo            ###   ########.fr       */
+/*   Updated: 2020/03/02 14:10:34 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,10 @@ MU_TEST(malloc_test_multiple)
 	for (size_t i = 1; i < 5000; i += 3)
 	{
 		ptr = malloc(i);
-		mu_check(ptr != NULL);
-		mu_check((uintptr_t)ptr % 16 == 0);
+		if (ptr == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr % 16 != 0)
+			mu_fail("bad alignment");
 		memset(ptr, 'a', i);
 		free(ptr);
 	}
@@ -128,8 +130,10 @@ MU_TEST(malloc_test_corruption)
 	for (size_t i = 1; i < 5000; i += 3)
 	{
 		ptr[i] = malloc(i);
-		mu_check(ptr[i] != NULL);
-		mu_check((uintptr_t)ptr[i] % 16 == 0);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 		memset(ptr[i], 'a', i);
 	}
 
@@ -158,8 +162,10 @@ MU_TEST(malloc_test_memset1)
 	for (size_t i = 1; i < 5000; i += 3)
 	{
 		ptr[i] = malloc(i);
-		mu_check(ptr[i] != NULL);
-		mu_check((uintptr_t)ptr[i] % 16 == 0);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 	}
 
 	for (size_t i = 1; i < 5000; i += 3)
@@ -176,8 +182,10 @@ MU_TEST(malloc_test_memset2)
 	for (size_t i = 1; i < 5000; i += 3)
 	{
 		ptr[i] = malloc(i);
-		mu_check(ptr[i] != NULL);
-		mu_check((uintptr_t)ptr[i] % 16 == 0);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 	}
 
 	for (size_t i = 1; i < 5000; i += 3)
@@ -203,9 +211,11 @@ MU_TEST(malloc_test_memset3)
 	for (size_t i = 1; i < 5000; i += 3)
 	{
 		ptr[i] = malloc(i);
-		mu_check(ptr[i] != NULL);
+		if (ptr[i] == NULL)
+			mu_fail("Ptr is null");
+		if ((uintptr_t)ptr[i] % 16 != 0)
+			mu_fail("bad alignment");
 		memset(ptr[i], 'a', i);
-		mu_check((uintptr_t)ptr[i] % 16 == 0);
 	}
 
 	for (size_t i = 1; i < 5000; i += 3)
@@ -240,9 +250,11 @@ MU_TEST(malloc_test_memset4)
 		for (size_t i = 1; i < 5000; i += 3)
 		{
 			ptr[i] = malloc(len);
-			mu_check(ptr[i] != NULL);
+			if (ptr[i] == NULL)
+				mu_fail("Ptr is null");
+			if ((uintptr_t)ptr[i] % 16 != 0)
+				mu_fail("bad alignment");
 			memset(ptr[i], 'a', len);
-			mu_check((uintptr_t)ptr[i] % 16 == 0);
 		}
 
 		for (size_t i = 1; i < 5000; i += 3)
