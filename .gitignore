@@ -54,5 +54,6 @@ dkms.conf
 # Misc
 *.vim
 *.swp
+*.ccls
 *.DS_Store
 **/*outs/
